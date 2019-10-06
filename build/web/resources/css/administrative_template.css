@@ -1,0 +1,118 @@
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+  height: 100%; }
+
+@media (max-width: 740px) {
+  .full-page-intro {
+    height: 1000px; } }
+
+/* Half Page Carousel itself*/
+.carousel {
+  height: 50%; }
+  .carousel .carousel-inner {
+    height: 100%; }
+    .carousel .carousel-inner .carousel-item,
+    .carousel .carousel-inner .active {
+      height: 100%; }
+
+/* Adjustment for mobile devices*/
+@media (max-width: 776px) {
+  .carousel {
+    height: 100%; } }
+
+/* Navbar animation */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.3); }
+
+.top-nav-collapse {
+  background-color: #1C2331; }
+
+/* Adding color to the Navbar on mobile */
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #1C2331; } }
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+  background-color: #1C2331; }
+
+.sidebar-fixed {
+  height: 100vh;
+  width: 270px;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  z-index: 1050;
+  background-color: #fff;
+  padding: 1.5rem;
+  padding-top: 0; }
+  .sidebar-fixed .list-group .active {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -webkit-border-radius: 5px;
+    border-radius: 5px; }
+  .sidebar-fixed .logo-wrapper {
+    padding: 2.5rem; }
+    .sidebar-fixed .logo-wrapper img {
+      max-height: 50px; }
+
+@media (min-width: 1200px) {
+  .navbar,
+  .page-footer,
+  main {
+    padding-left: 270px; } }
+
+@media (max-width: 1199.98px) {
+  .sidebar-fixed {
+    display: none; } }
+
+
+.bg-white2{
+    background-color:#E8ECF8; 
+}
+body{
+    height: 100%;
+    width: 100%;
+}
+.panel{
+    padding-left: 20%;
+    padding-right: 15%;
+    min-height: 325px;
+}
+#theDiv{
+    background-image: url("../img/Nosotros.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+    height: 225px;
+}
+#Titulo{
+    text-align: center;
+    padding-top: 5%;
+    font-family:'Lato';
+}
+@media (min-width: 256px) and (max-width: 576px){
+    .panel{
+        padding-left: 5%;
+        padding-right: 5%;
+        min-height: 325px;
+    }
+}/* Declaracion sm */
+
+@media (min-width: 576px) and (max-width: 768px){
+    .panel{
+        padding-left: 5%;
+        padding-right: 5%;
+        min-height: 325px;
+    }
+}/* Declaracion md*/
+
+@media (min-width: 768px) and (max-width: 992px){
+
+}/* Declaracion lg*/
+
+@media (min-width: 992px){
+
+}/* Declaracion xl*/
+

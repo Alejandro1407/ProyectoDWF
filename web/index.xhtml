@@ -1,0 +1,67 @@
+<ui:composition template="/WEB-INF/template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="title">Multicinema-Index</ui:define>
+    
+    <ui:define name="content">
+        <h:outputStylesheet library="css" name="StyleLogin.css"/> 
+        <div class="view full-page-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;">
+            <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+              <div class="container">
+                <div class="row wow fadeIn">
+                  <div class="col-md-6 mb-4 white-text text-center text-md-left">
+                        <h1 class="display-4 font-weight-bold">Multicinema S.A</h1>
+                    <hr class="hr-light"/>
+                    <p>
+                      <strong>Disfrute de una aplicacion desarrollada en JAVA utilizando JSF,Hibernate y Primal Faces</strong>
+                    </p>
+                    <p class="mb-4 d-none d-md-block">
+                      <strong></strong>
+                    </p>
+                  </div>
+                  <div class="col-md-6 col-xl-5 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <h:form>
+                          <h3 class="dark-grey-text text-center">
+                            <strong>Iniciar Sesión</strong>
+                          </h3>
+                          <hr/>
+                             <div class="md-form">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <p:inputText id="form2" class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
+                                     requiredMessage="Debe ingresar un email"
+                                     validatorMessage="Email Invalido">
+                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                </p:inputText>
+                            </div>
+                            <div class="md-form">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <p:password id="txtpass" class="form-control" value="#{sesion.usuario.password}" required="true" placeholder="********"
+                                        requiredMessage="Debe ingresar una contraseña"
+                                        validatorMessage="Email no valido">
+                                </p:password>
+                            </div>
+                            <div class="text-center">
+                                <p:messages closable="true" />
+                                <h:commandButton value="Entrar" action="#{sesion.iniciarSesion}" class="btn btn-success"/>
+                            </div>
+                            <br/>
+                            <hr/>
+                            <h:outputLink value="">¿Olvido su contraseña?, </h:outputLink> <h:outputLink value="">Registrarse</h:outputLink>
+                        </h:form>    
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </ui:define>
+</ui:composition>
+
+	
