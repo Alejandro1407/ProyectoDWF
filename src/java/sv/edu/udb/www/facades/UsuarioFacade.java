@@ -48,6 +48,63 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
              return null;
          }
     }
-
+    
+    public Usuario FindByCorreo(String Email){
+        try{
+            EntityManager em =  JPAUtil.getEntityManager();
+            Query query = em.createNamedQuery("Usuario.findByCorreo").setParameter("correo",Email); 
+            try{
+                Usuario u = (Usuario) query.getSingleResult();
+                return u;
+            }catch(Exception e){
+                return new Usuario();
+            }
+         }catch(Exception e){
+             return null;
+         }
+    }
+    
+    public boolean ActualizarContraseña(String NewPass,int ID){
+        try{
+            EntityManager em =  JPAUtil.getEntityManager();
+            Query query = em.createNativeQuery("UPDATE usuario SET password = ? WHERE id = ?").setParameter(1,NewPass).
+                                                                                               setParameter(2,ID);
+            query.executeUpdate();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
+        
+    public Boolean ValidateExitsEmail(String Email){
+          try{
+            EntityManager em =  JPAUtil.getEntityManager();
+            Query query = em.createNamedQuery("Usuario.findByCorreo").setParameter("correo",Email); 
+            try{
+                Usuario u = (Usuario) query.getSingleResult();
+                return true;
+            }catch(Exception e){
+                return false;
+            }
+         }catch(Exception e){
+             return null;
+         }
+    }
+    
+    public Boolean ValidateExitsDUI(String DUI){
+          try{
+            EntityManager em =  JPAUtil.getEntityManager();
+            Query query = em.createNamedQuery("Usuario.findByDui").setParameter("dui",DUI); 
+            try{
+                Usuario u = (Usuario) query.getSingleResult();
+                return true;
+            }catch(Exception e){
+                return false;
+            }
+         }catch(Exception e){
+             return null;
+         }
+    }
     
 }

@@ -59,7 +59,7 @@ public class Usuario implements Serializable {
     private String correo;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 150)
     private String password;
     @Basic(optional = false)
     @NotNull

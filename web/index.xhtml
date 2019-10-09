@@ -43,17 +43,17 @@
                                 <i class="fas fa-lock prefix grey-text"></i>
                                 <p:password id="txtpass" class="form-control" value="#{sesion.usuario.password}" required="true" placeholder="********"
                                         requiredMessage="Debe ingresar una contraseña"
-                                        validatorMessage="Email no valido">
+                                        validatorMessage="Contraseña no valida">
+                                        <f:validateRegex pattern="^[A-za-z]{8}$"/>   
                                 </p:password>
                             </div>
                             <div class="text-center">
                                 <p:messages closable="true" />
                                 <h:commandButton value="Entrar" action="#{sesion.iniciarSesion}" class="btn btn-success"/>
                             </div>
-                            <br/>
                             <hr/>
-                            <h:outputLink value="">¿Olvido su contraseña?, </h:outputLink> <h:outputLink value="">Registrarse</h:outputLink>
                         </h:form>    
+                           <button id="btnmodalRecover" class="text-info btn btn-white border-0 p-0 shadow-none">Olvido su contraseña?</button>,<button id="btnmodalRegister" class="text-success btn btn-white border-0 p-0 shadow-none">Registrarse</button>
                       </div>
                       </div>
                     </div>
@@ -61,6 +61,129 @@
                 </div>
               </div>
             </div>
+       
+        <h:outputScript>
+            $(document).ready(function (){
+                $('#btnmodalRecover').on("click",function(e){
+                    e.preventDefault();
+                    $('#modalRecoverForm').modal('show');
+                });
+                 $('#btnmodalRegister').on("click",function(e){
+                    e.preventDefault();
+                    $('#modalRegisterForm').modal('show');
+                });
+            });            
+        </h:outputScript>
+        
+        
+        <!-- Modal para recuperar contraseña -->
+        <div class="modal fade" id="modalRecoverForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+              <h:form>
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Recuperar contraseña</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                      <p:inputText id="form2" class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
+                                     requiredMessage="Debe ingresar un email valido para recuperar su contraseña"
+                                     validatorMessage="Email ingresado no es valido">
+                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                      </p:inputText>
+                  </div>
+                  <p class="grey-text">Se te enviara tu nueva contraseña por Email</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <h:commandButton class="btn btn-success" action="#{sesion.recuperarContrasenia}" value="Recuperar" ></h:commandButton>
+                </div>
+                </h:form>
+              </div>
+            </div>
+          </div>
+        <!-- Modal para recuperar contraseña-->
+        
+        <!-- Modal para registrarse -->
+        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Registrarse</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body mx-3">
+                <h:form>
+                  <div class="md-form mb-5">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <p:inputText class="form-control" value="#{sesion.usuario.nombre}" required="true" placeholder="Kevin Matthew Cruz Pablo" 
+                                     requiredMessage="Debe ingresar un nombre"
+                                     validatorMessage="Nombre ingresado no valido">
+                                     <f:validateRegex pattern="^[A-Za-z]{4,}$"/>
+                      </p:inputText>
+                  </div>
+                    <div class="md-form mb-5">
+                    <i class="fas fa-user prefix grey-text"></i>
+                    <p:inputText class="form-control" value="#{sesion.usuario.direccion}" required="true" placeholder="Soyapango, San Salvador" 
+                                     requiredMessage="Debe ingresar una direccion"
+                                     validatorMessage="Direccion ingresada no valido">
+                                     <f:validateRegex pattern="^[A-Za-z]{5,}$"/>
+                      </p:inputText>
+                  </div>
+                  <div class="md-form mb-5">
+                    <i class="fas fa-phone prefix grey-text"></i>
+                   <p:inputText  class="form-control" value="#{sesion.usuario.telefono}" required="true" placeholder="XXXX-XXXX" 
+                                     requiredMessage="Debe ingresar un numero"
+                                     validatorMessage="Numero ingresado no valido">
+                                     <f:validateRegex pattern="^[9|6|7][0-9]{7}$"/>
+                      </p:inputText>
+                  </div>
+
+                  <div class="md-form mb-5">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                     <p:inputText  class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
+                                     requiredMessage="Debe ingresar un email"
+                                     validatorMessage="Email ingresado no es valido">
+                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                      </p:inputText>
+                  </div>
+
+                  <div class="md-form mb-5">
+                    <i class="far fa-id-card prefix grey-text"></i>
+                    <p:inputText  class="form-control" value="#{sesion.usuario.dui}" required="true" placeholder="XXXXXXXX-X" 
+                                     requiredMessage="Debe ingresar un numero DUI"
+                                     validatorMessage="DUI ingresado no valido">
+                                     <f:validateRegex pattern="^[0-9]{8}-[0-9]$"/>
+                    </p:inputText>
+                  </div>
+
+                  <div class="md-form mb-5">
+                    <i class="fas fa-key prefix grey-text"></i>
+                    <p:password id="txtnewpass" class="form-control" value="#{sesion.usuario.password}" required="true" placeholder="********"
+                                        requiredMessage="Debe ingresar una contraseña"
+                                        validatorMessage="Longitud minima: 8 Caracteres">
+                                        <f:validateRegex pattern="^[A-za-z]{8}$"/>   
+                    </p:password>
+                  </div>
+                      <p:messages closable="true" id="messages" />
+                    <div class="modal-footer d-flex justify-content-center">
+                        <p:commandButton update="messages" validateClient="true" value="Registrarse" action="${sesion.registrarUusario}" style="margin-right:10px"/>
+                    </div>
+
+                    </h:form>
+                </div>
+                        
+              
+              </div>
+            </div>
+            </div>
+       
+        
     </ui:define>
 </ui:composition>
 

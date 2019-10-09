@@ -7,6 +7,7 @@ package sv.edu.udb.www.facades;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -25,7 +26,7 @@ public abstract class AbstractFacade<T> {
     public void create(T entity) {
         getEntityManager().persist(entity);
     }
-
+    @Transactional
     public void edit(T entity) {
         getEntityManager().merge(entity);
     }
