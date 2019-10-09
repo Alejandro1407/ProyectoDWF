@@ -3,16 +3,20 @@ package sv.edu.udb.www.managedbeans;
 import sv.edu.udb.www.util.JSFUtil;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.primefaces.util.Constants;
 import sv.edu.udb.www.entities.Tipo;
+import sv.edu.udb.www.entities.Token;
 import sv.edu.udb.www.entities.Usuario;
+import sv.edu.udb.www.facades.TokenFacade;
 import sv.edu.udb.www.facades.UsuarioFacade;
 import sv.edu.udb.www.util.Mailer;
 
@@ -25,6 +29,8 @@ public class Sesion implements Serializable{
     
     @EJB
     private final UsuarioFacade usuarioFacade =  new UsuarioFacade();
+    @EJB
+    private final TokenFacade tokenFacade =  new TokenFacade();
     
     ExternalContext externalContext;
     HttpSession session;
@@ -57,6 +63,20 @@ public class Sesion implements Serializable{
                 JSFUtil.addErrorMessage("¡Error! Correo electronico ya registrado");
                 return;
             }
+            Mailer mailer = new Mailer();
+            UUID Token = UUID.randomUUID();
+            Token token = new Token();
+            token.setEmail(usuario.getCorreo());
+            token.setToken(Token.toString());
+            token.setEnabled(true);
+            String Message = "Hola\nBienvenido a Multicinema SV\n"
+                            + "\nPara validar su correo entre al siguiente link"
+                            + "\nhttp://localhost:21058/ProyectoDWF/index.xhtml?Email=" + token.getEmail() + "&Token=" + token.getToken()
+                            + "\n\nSi no hiciste dicha solicitud ignora este mensaje"
+                            + "\n\nDepartamento de Administración - Multicinema SV";
+
+            mailer.send(usuario.getCorreo(), "Bienvendio a Multicinema SV" , Message);
+            tokenFacade.create(token);
             usuario.setTipo(new Tipo(2,"Cliente"));
             usuario.setPassword(JSFUtil.HashPassword(usuario.getPassword()));
             usuarioFacade.create(usuario);
@@ -66,7 +86,31 @@ public class Sesion implements Serializable{
         }
     
     }
-
+    
+    public void validateEmail(){
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String Email = request.getParameter("Email");
+        String Token =  request.getParameter("Token");
+        if(Email == null){
+            return;
+        }
+        Token t =  tokenFacade.GetToken(Email, Token);
+         if(t == null){
+          JSFUtil.addErrorMessage("¡Error! No se pudo validar");
+          return;
+        }
+        if(t.getId() == null ){
+          JSFUtil.addInfoMessage("Token ingresado invalido");
+          return;
+        }
+        if(t.getEnabled() == false ){
+          JSFUtil.addInfoMessage("Email ya confirmado");
+          return;
+        } 
+        t.setEnabled(false);
+        tokenFacade.edit(t);
+        JSFUtil.addSucessMessage("Email Confirmado");
+    }
     
     public void iniciarSesion() {
       
@@ -79,6 +123,10 @@ public class Sesion implements Serializable{
       if(usuario.getId() == null ){
         JSFUtil.addInfoMessage("Usuario y/o contraseña incorrectos");
         return;
+      }
+      if(usuario.getEnabled() == false){
+           JSFUtil.addInfoMessage("¡Email no confirmado!");
+          return;
       }
      try{
         externalContext = FacesContext.getCurrentInstance().getExternalContext();

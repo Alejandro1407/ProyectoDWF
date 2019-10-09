@@ -78,7 +78,9 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "tipo", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Tipo tipo;
-
+    @Basic(optional = false)
+    @NotNull
+    private boolean enabled;
     public Usuario() {
     }
 
@@ -150,7 +152,7 @@ public class Usuario implements Serializable {
     public void setDui(String dui) {
         this.dui = dui;
     }
-
+    
     public String getTarjeta() {
         return tarjeta;
     }
@@ -174,6 +176,10 @@ public class Usuario implements Serializable {
 
     public void setTipo(Tipo tipo) {
         this.tipo = tipo;
+    }
+    
+    public boolean getEnabled(){
+        return this.enabled;
     }
 
     @Override

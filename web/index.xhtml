@@ -6,8 +6,8 @@
     xmlns:p="http://primefaces.org/ui">
     
     <ui:define name="title">Multicinema-Index</ui:define>
-    
     <ui:define name="content">
+        #{sesion.validateEmail()}
         <h:outputStylesheet library="css" name="StyleLogin.css"/> 
         <div class="view full-page-intro" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg'); background-repeat: no-repeat; background-size: cover;">
             <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
