@@ -7,16 +7,16 @@
 
     <ui:define name="title">Multicinema-Administrador</ui:define>
     
-      <ui:define name="options">
+    <ui:define name="options">
         
         <div class="list-group list-group-flush" >
-             <a href="index.xhtml" class="list-group-item active  waves-effect">
+             <a href="index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-chart-pie mr-5">DashBoard</i>
             </a>
             <a href="peliculas.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-video mr-3">Peliculas</i>
             </a>
-            <a href="usuarios.xhtml" class="list-group-item list-group-item-action waves-effect">
+            <a href="usuarios.xhtml" class="list-group-item active waves-effect">
                 <i class="fas fa-users mr-4"> Usuarios</i>
             </a>
             <a href="idiomas.xhtml" class="list-group-item list-group-item-action waves-effect">
@@ -38,33 +38,12 @@
     </ui:define>
     
     
+    
     <ui:define name="content">
         <!-- Inicio de la Programación toxica-->
-        <div class="row wow fadeIn">
-            
-            <div class="col-lg-6 col-md-6 mb-4">
-              <div class="card">
-                <div class="card-header text-center">Gestión de Peliculas</div>
-                    <h5 class="text-center grey-text mt-3 mr-auto ml-auto d-block w-50">Registrar, actualizar y eliminar la información referida a las peliculas exhibidas</h5>
-                <div class="card-body text-center">
-                    <a href="/DesafioMVC/Administrador/Empresa" class="btn btn-black"><i class="fas fa-video mr-3"></i>Gestionar Peliculas</a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-lg-6 col-md-6 mb-4">
-              <div class="card">
-                <div class="card-header text-center">Gestión de Usuario</div>
-                    <h5 class="text-center grey-text mt-3 mr-auto ml-auto d-block w-50">Registrarse, actualizar y eliminar los usuarios que pueden acceder al sistema</h5>
-                <div class="card-body text-center">
-                    <a href="/DesafioMVC/Administrador/Empresa" class="btn btn-black"><i class="fas fa-users mr-4"></i>Gestionar Usuarios</a>
-                </div>
-              </div>
-            </div>
-            
-            
-            
-        </div>
+        
+        CRUD Usuarios
+        
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>
