@@ -31,8 +31,10 @@
             <a href="cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
             </a>
-             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
-             </p:commandButton>
+            <h:form>
+                <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
+                </p:commandButton>
+            </h:form>
         </div>
         
     </ui:define>
@@ -40,9 +42,35 @@
     
     <ui:define name="content">
         <!-- Inicio de la Programación toxica-->
-        
-        CRUD Idiomas
-        
+        <a href="AgregarIdioma.xhtml" class="btn btn-success">Agregar</a>
+        <p:messages closable="true"/>
+        <br/>
+         <h3 class="grey-text text-center w-100">Clasificaciones</h3><br/>
+        <div class="d-flex justify-content-center w-100"> 
+            <h:dataTable value="#{idiomasController.obtenerIdiomas()}" var="idioma" class="table table-responsive w-25 table-striped h-100">
+                <h:column>
+                    <f:facet name="header">#</f:facet>
+                    #{idioma.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                    #{idioma.idioma}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Acciones</f:facet>
+                    <h:form>
+                        <h:commandButton action="#{idiomasController.eliminarIdioma()}" class="btn btn-danger" onclick="return confirmarEliminacion();" value="Eliminar">
+                            <f:param name="id" value="#{idioma.id}" />
+                        </h:commandButton>
+                    </h:form>
+                </h:column>      
+            </h:dataTable>
+        </div>
+         <h:outputScript>
+            function confirmarEliminacion(){
+                return confirm("¿Está seguro que desea eliminar este estudiante");
+            }
+         </h:outputScript>
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>

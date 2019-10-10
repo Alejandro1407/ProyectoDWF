@@ -58,7 +58,7 @@
                 <h:column>
                     <f:facet name="header">Acciones</f:facet>
                     <h:form>
-                        <h:commandButton action="#{generosController.eliminarGenero()}" class="btn btn-danger" value="Eliminar">
+                        <h:commandButton action="#{generosController.eliminarGenero()}" class="btn btn-danger" onclick="return confirmarEliminacion();" value="Eliminar">
                             <f:param name="id" value="#{genero.id}" />
                         </h:commandButton>
                     </h:form>
@@ -66,6 +66,11 @@
                 
             </h:dataTable>
         </div>
+        <h:outputScript>
+            function confirmarEliminacion(){
+                return confirm("¿Está seguro que desea eliminar este estudiante");
+            }
+         </h:outputScript>
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>
