@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import sv.edu.udb.www.entities.Entrada;
 import sv.edu.udb.www.entities.Sala;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-07T18:27:40")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-09T19:39:47")
 @StaticMetamodel(Asiento.class)
 public class Asiento_ { 
 

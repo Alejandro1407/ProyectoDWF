@@ -12,7 +12,7 @@
         <h:outputStylesheet library="css" name="all.css"/> 
         <h:outputStylesheet library="css" name="administrative_template.css"/>
     </h:head>
-    <h:body class="grey lighten-3">
+    <h:body class="lighten-3">
         
     <!-- Sidebar logo-wrapper-->
         <div class="sidebar-fixed position-fixed">   
@@ -25,9 +25,15 @@
     
     <!--Main layout-->
         <main class="pt-5 mx-lg-5">
-          <div class="container-fluid mt-3">
+          <div class="container-fluid mt-3 ">
             <ui:insert name="content" />
            </div>
         </main>   
     </h:body>
 </html>
+
+<!--    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>nova-colored</param-value>
+    </context-param>
+-->

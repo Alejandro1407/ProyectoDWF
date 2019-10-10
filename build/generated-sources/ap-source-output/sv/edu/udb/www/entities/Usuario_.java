@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import sv.edu.udb.www.entities.Entrada;
 import sv.edu.udb.www.entities.Tipo;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-07T18:27:40")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-09T19:39:47")
 @StaticMetamodel(Usuario.class)
 public class Usuario_ { 
 
@@ -21,5 +21,6 @@ public class Usuario_ {
     public static volatile SingularAttribute<Usuario, String> telefono;
     public static volatile SingularAttribute<Usuario, String> tarjeta;
     public static volatile SingularAttribute<Usuario, String> nombre;
+    public static volatile SingularAttribute<Usuario, Boolean> enabled;
 
 }

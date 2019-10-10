@@ -32,8 +32,7 @@
                 <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
             </a>
             <h:form>
-             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
-             </p:commandButton>
+             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="#{sesion.cerrarSesion}" />
             </h:form>
         </div>
         
@@ -42,31 +41,26 @@
     
     <ui:define name="content">
         <!-- Inicio de la Programación toxica-->
-        <a href="AgregarClasificacion.xhtml" class="btn btn-success">Agregar</a>
-        <p:messages closable="true"/>
+        <a href="clasificacion.xhtml" class="btn btn-success">Volver</a>
         <br/>
-         <h3 class="grey-text text-center w-100">Clasificaciones</h3><br/>
-        <div class="d-flex justify-content-center w-100"> 
-            <h:dataTable value="#{clasificacionController.obtenerClasificaciones()}" var="clasificacion" class="table table-responsive w-25 table-striped h-100">
-                <h:column>
-                    <f:facet name="header">#</f:facet>
-                    #{clasificacion.id}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Nombre</f:facet>
-                    #{clasificacion.clasificacion}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Acciones</f:facet>
-                    <h:form>
-                        <h:commandButton action="#{clasificacionController.eliminarClasificacion()}" class="btn btn-danger" value="Eliminar">
-                            <f:param name="id" value="#{clasificacion.id}" />
-                        </h:commandButton>
-                    </h:form>
-                </h:column>
-                
-            </h:dataTable>
+        <div class="d-flex justify-content-center">
+            <div class="shadow-none w-50 p-5 ">        
+                <h:form>
+                    <h3 class="grey-text text-center">Agregar Clasificación</h3>
+                    <div class="md-form">
+                        <label>Nombre:</label><br/><br/>
+                        <p:inputText class="form-control" value="#{clasificacionController.clasificacion.clasificacion}" required="true" placeholder="PT-12" 
+                                         requiredMessage="Debe ingresar un nombre"
+                                         validatorMessage="Nombre invalido">
+                                         <f:validateRegex pattern="^[A-Za-z0-9-]{2,}$"/>
+                        </p:inputText>
+                    </div>	
+                    <p:messages closable="true" />
+                    <h:commandButton value="Aceptar" action="#{clasificacionController.insertarClasificacion()}" class="btn btn-success"  />
+                </h:form>
+            </div>
         </div>
+
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>
