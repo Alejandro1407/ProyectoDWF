@@ -1,0 +1,87 @@
+<ui:composition template="/WEB-INF/administrative_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Multicinema-Administrador</ui:define>
+    
+      <ui:define name="options">
+        
+        <div class="list-group list-group-flush" >
+             <a href="index.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-chart-pie mr-5">DashBoard</i>
+            </a>
+            <a href="peliculas.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-video mr-3">Peliculas</i>
+            </a>
+            <a href="usuarios.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-users mr-4"> Usuarios</i>
+            </a>
+            <a href="idiomas.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-language mr-5">Idiomas</i>
+            </a>
+            <a href="generos.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-tag mr-3">Generos</i>
+            </a>
+            <a href="clasificacion.xhtml" class="list-group-item active waves-effect">
+                <i class="fas fa-film mr-3">Clasificación</i>
+            </a>
+            <a href="cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
+            </a>
+            <h:form>
+             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="#{sesion.cerrarSesion}" />
+            </h:form>
+        </div>
+        
+    </ui:define>
+    
+    
+    <ui:define name="content">
+        <!-- Inicio de la Programación toxica-->
+        <a href="usuarios.xhtml" class="btn btn-success">Volver</a>
+        <br/>
+        <div class="d-flex justify-content-center">
+            <div class="shadow-none w-50 p-6 ">        
+                <h:form>
+                    <h3 class="grey-text text-center">Agregar Usuario</h3>
+                    <div class="md-form">
+                        <div class="form-group mx-sm-2 mb-2">
+                        <label>Tipo:</label><br/><br/>
+                        <p:inputNumber class="form-control w-40" value="#{administrador.usuario.tipo}" required="true" placeholder="tipo de usuario" 
+                                       requiredMessage="Debe ingresar un tipo" ></p:inputNumber>
+                        <p:inputText class="form-control w-40" value="#{administrador.usuario.nombre}" required="true" placeholder="Nombre" 
+                                       requiredMessage="Ingrese un nombre para el usuario" ></p:inputText>
+                        <p:inputText class="form-control w-40" value="#{administrador.usuario.telefono}" required="true" placeholder="Nombre" 
+                                       requiredMessage="Ingrese un nombre para el usuario" ></p:inputText>
+                        <p:inputText class="form-control w-40" value="#{administrador.usuario.direccion}" required="true" placeholder="Nombre" 
+                                       requiredMessage="Ingrese un nombre para el usuario" ></p:inputText>
+                         <p:inputText class="form-control w-40" value="#{administrador.usuario.dui}" required="true" placeholder="Nombre" 
+                                       requiredMessage="Ingrese un nombre para el usuario" ></p:inputText>
+                        <p:inputText class="form-control w-40" value="#{administrador.usuario.correo}" required="true" placeholder="Nombre" 
+                                       requiredMessage="Ingrese un nombre para el usuario" ></p:inputText>
+                        <p:inputText class="form-control w-40" value="#{administrador.usuario.password}" required="true" placeholder="Nombre" 
+                                       requiredMessage="Ingrese un nombre para el usuario" ></p:inputText>
+                        <p:inputText class="form-control w-40" value="#{administrador.usuario.tarjeta}" required="true" placeholder="Nombre" 
+                                       requiredMessage="Ingrese un nombre para el usuario" ></p:inputText>
+                        
+                        </div>
+                     
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>	
+                    <p:messages closable="true" />
+                    <h:commandButton value="Aceptar" action="#{administrador.insertarUsuario()}" class="btn btn-success"  />
+                </h:form>
+            </div>
+        </div>
+
+        <!-- Fin Programación toxica-->
+    </ui:define>
+</ui:composition>
