@@ -13,7 +13,7 @@
              <a href="index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-chart-pie mr-5">DashBoard</i>
             </a>
-             <a href="Peliculas/index.xhtml" class="list-group-item list-group-item-action waves-effect">
+            <a href="peliculas.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-video mr-3">Peliculas</i>
             </a>
             <a href="usuarios.xhtml" class="list-group-item active waves-effect">
@@ -40,10 +40,59 @@
     
     
     <ui:define name="content">
-        <!-- Inicio de la Programación toxica-->
-        
-        CRUD Usuarios
-        
+        <a href="AgregarUsuario.xhtml" class="btn btn-success">Agregar</a>
+        <p:messages closable="true"/>
+        <br/>
+         <h3 class="grey-text text-center w-100">Usuarios</h3><br/>
+         
+         
+          <h:form id="datatabletipo">
+            <label for="datatabletipo:tipo">Tipo de usuario:  </label>
+            <h:selectOneMenu id="tipo" value="# " style="width:125px">
+             <f:selectItems value="#{administrador.FindType(1)}"
+                               var="l" itemLabel="#{l.id}" itemValue="#{l.id}"/>
+                
+              <f:ajax event="change"
+                        execute = "tipo"
+                        listener="@form"
+                        render="@form" />
+        </h:selectOneMenu>
+                  
+             <div class="d-flex justify-content-center"> 
+                 <h:dataTable value="#{administrador.FindAllByType(administrador.FindType(1))}" var="usuario" class="table table-responsive w-70 table-striped h-100">
+                <h:column>
+                    <f:facet name="header">#</f:facet>
+                    #{usuario.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                    #{usuario.nombre}
+                </h:column>
+            
+                <h:column>
+                    <f:facet name="header">DUI</f:facet>
+                    #{usuario.dui}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Correo Electronico</f:facet>
+                    #{usuario.correo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Acciones</f:facet>
+                    <h:form>
+                       
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
+          <h:outputScript>
+            function confirmarEliminacion(){
+                return confirm("¿Está seguro que desea eliminar este estudiante");
+            }
+         </h:outputScript>
         <!-- Fin Programación toxica-->
+           </h:form>
+         
+      
     </ui:define>
 </ui:composition>
