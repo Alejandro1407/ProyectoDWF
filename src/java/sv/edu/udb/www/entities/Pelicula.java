@@ -44,6 +44,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pelicula.findByEstreno", query = "SELECT p FROM Pelicula p WHERE p.estreno = :estreno")})
 public class Pelicula implements Serializable {
 
+   
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,7 +76,7 @@ public class Pelicula implements Serializable {
         @JoinColumn(name = "pelicula", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "director", referencedColumnName = "id")})
     @ManyToMany
-    private List<Produccion> produccionList;
+    private List<Produccion> directores;
     @JoinTable(name = "generopelicula", joinColumns = {
         @JoinColumn(name = "pelicula", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "genero", referencedColumnName = "id")})
@@ -84,12 +86,18 @@ public class Pelicula implements Serializable {
         @JoinColumn(name = "pelicula", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "actor", referencedColumnName = "id")})
     @ManyToMany
-    private List<Produccion> produccionList1;
+    private List<Produccion> actores;
     @JoinColumn(name = "clasificacion", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Clasificacion clasificacion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pelicula")
     private List<Funcion> funcionList;
+    
+    @JoinTable(name = "idiomapelicula", joinColumns = {
+        @JoinColumn(name = "pelicula", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "idioma", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Idioma> idiomaList;
 
     public Pelicula() {
     }
@@ -164,12 +172,12 @@ public class Pelicula implements Serializable {
     }
 
     @XmlTransient
-    public List<Produccion> getProduccionList() {
-        return produccionList;
+    public List<Produccion> getDirectoresList() {
+        return directores;
     }
 
-    public void setProduccionList(List<Produccion> produccionList) {
-        this.produccionList = produccionList;
+    public void setDirectoresList(List<Produccion> DirectoresList) {
+        this.directores = DirectoresList;
     }
 
     @XmlTransient
@@ -182,12 +190,12 @@ public class Pelicula implements Serializable {
     }
 
     @XmlTransient
-    public List<Produccion> getProduccionList1() {
-        return produccionList1;
+    public List<Produccion> getActoresList() {
+        return this.actores;
     }
 
-    public void setProduccionList1(List<Produccion> produccionList1) {
-        this.produccionList1 = produccionList1;
+    public void setActoresList(List<Produccion> actoresList) {
+        this.actores = actoresList;
     }
 
     public Clasificacion getClasificacion() {
@@ -205,6 +213,14 @@ public class Pelicula implements Serializable {
 
     public void setFuncionList(List<Funcion> funcionList) {
         this.funcionList = funcionList;
+    }
+    @XmlTransient
+    public List<Idioma> getIdiomaList() {
+        return idiomaList;
+    }
+
+    public void setIdiomaList(List<Idioma> idiomaList) {
+        this.idiomaList = idiomaList;
     }
 
     @Override

@@ -43,10 +43,10 @@ public class Produccion implements Serializable {
     @NotNull
     @Size(min = 1, max = 100)
     private String nombre;
-    @ManyToMany(mappedBy = "produccionList")
-    private List<Pelicula> peliculaList;
-    @ManyToMany(mappedBy = "produccionList1")
-    private List<Pelicula> peliculaList1;
+    @ManyToMany(mappedBy = "directores")
+    private List<Pelicula> directores;
+    @ManyToMany(mappedBy = "actores")
+    private List<Pelicula> actores;
     @JoinColumn(name = "oficio", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Oficio oficio;
@@ -80,21 +80,22 @@ public class Produccion implements Serializable {
     }
 
     @XmlTransient
-    public List<Pelicula> getPeliculaList() {
-        return peliculaList;
+    public List<Pelicula> getDirectores() {
+        return directores;
     }
 
-    public void setPeliculaList(List<Pelicula> peliculaList) {
-        this.peliculaList = peliculaList;
+    public void setDirectores(List<Pelicula> directores) {
+        this.directores = directores;
     }
 
     @XmlTransient
-    public List<Pelicula> getPeliculaList1() {
-        return peliculaList1;
+    public List<Pelicula> getActores() {
+        return actores;
     }
 
-    public void setPeliculaList1(List<Pelicula> peliculaList1) {
-        this.peliculaList1 = peliculaList1;
+    public void setActores(List<Pelicula> actores) {
+        
+        this.actores = actores;
     }
 
     public Oficio getOficio() {

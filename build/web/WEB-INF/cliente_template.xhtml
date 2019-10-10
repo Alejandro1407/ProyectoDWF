@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html lang="es" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="mdb.css"/>   
+        <h:outputStylesheet library="css" name="all.css"/>   
+    </h:head>
+    <h:body>
+        <!-- Header -->
+        <nav class="navbar navbar-expand-lg p-0" style="background: linear-gradient(to bottom, #2616F2, #171717);-webkit-box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);
+                                                                    -moz-box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);
+                                                                    box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);">
+            <div class="container">    
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavBar"
+                        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="p-0"><p class="white-text" style="color:FFFCFC;font-family:Anna SC ITC TT;font-size:200%;font-style:normal;"><h:graphicImage library="images" name="logo.png" width="56" height="57"/> Multicinema</p></div>
+                <div class="collapse navbar-collapse" id="basicExampleNav">
+                    <ul class="navbar-nav ml-auto nav-flex-icons">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Inicio
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="peliculas.xhtml">Peliculas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cartelera.xhtml">Cartelera</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="servicios.xhtml">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="promociones.xhtml">Promociones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contactanos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--Header-->
+        
+            <!-- Contenido-->
+            <ui:insert name="content" />
+            <!-- Contenido-->
+            
+            <!-- Footer-->
+            <section id="services" class="mt-5 overflow-hidden" style="background: linear-gradient(to bottom, #FFCB05, #FFCB05);-webkit-box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);
+                                                                        -moz-box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);
+                                                                        box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);padding: 50px 0;">    
+                <div class="containers">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2">
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="facebook-logo-png-9.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
+                                <div class="media-body">
+                                    <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestro Facebook </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
+                                    </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Siguenos en Facebook </a></p>
+                                </div>
+                            </div>
+                        </div><!--/.col-md-4-->
+                        <div class="col-md-3 col-sm-3">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="ig.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
+                                <div class="media-body">
+                                    <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestro Instagram </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
+                                    </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Siguenos en Instagram </a></p>
+                                </div>
+                            </div>
+                        </div><!--/.col-md-4-->
+                        <div class="col-md-3 col-sm-3">
+                            <div class="media">
+                                <div class="pull-left">
+                                    <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="app.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
+                                <div class="media-body">
+                                    <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestra App </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
+                                    </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Próximamente </a></p>
+                                </div>
+                            </div>
+                        </div><!--/.col-md-4-->
+                    </div>
+                </div>
+            </section>
+
+            <section id="bottom" style="background: linear-gradient(to bottom, #010105, #000000);">    <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6">
+                            <div class="1well well-3sm"><a href="Historia.php"><font style="color:#FFFFFF;"><h4>Quienes somos</h4></font></a></div>
+                            <ul class="arrow">
+                                <li><a href="Historia.php">Historia de la empresa</a></li>
+                                <li><a href="Complejos.php">Complejos</a></li>
+                                <li><a href="Bolsa_trabajo.php">Bolsa de trabajo</a></li>
+                                <li><a href="Contactanos.php">Contáctanos</a></li>
+                            </ul>
+                        </div><!--/.col-md-3-->
+
+                        <div class="col-md-3 col-sm-6">
+                            <div class="1naranja2"><a href="Cartelera.php"><font style="color:#FFFFFF;"><h4>Cartelera</h4></font></a></div>
+                            <div>
+                                <ul class="arrow">
+                                    <li><a href="Nuestros_servicios.php">Nuestros Servicios</a></li>
+                                    <li><a href="Dulceria.php">Nuestros Productos</a></li>
+                                    <li><a href="Festival_cine.php">Festival de cine</a></li>
+                                    <li><a href="Rse.php">Responsabilidad Social Empresarial</a></li>
+                                    <!--    <li><a href="#">Proximos Estrenos</a></li>
+                                        <li><a href="Preventa.php">Preventa</a></li> -->
+                                </ul>
+                            </div>
+                        </div><!--/.col-md-3-->
+
+
+                        <div class="col-md-3 col-sm-6">
+                            <h4><div class="Foot4ermenu2"><a href="Noticias.php"><font style="color:#FFFFFF;">Noticias</font></a></div></h4>
+                            <div>
+                                <div class="media"><div class="pull-left"><h:graphicImage library="images" name="4.jpg" width="62" height="32" style="border-radius: 7px;"/></div><div class="media-body"><span class="media-heading"><a href="Noticias_buscar.php?id=10">Así es como Visión podría salvar a todos en Vengadores: Endgame</a></span><small class="muted">Posteado 08-01-2019</small></div></div><div class="media"><div class="pull-left"><h:graphicImage library="images" name="frozen-2-imagenes.jpg" width="62" height="32" style="border-radius: 7px;"/></div><div class="media-body"><span class="media-heading"><a href="Noticias_buscar.php?id=12">“Frozen 2”, primer tráiler de la esperada secuela del mayor éxito de Disney</a></span><small class="muted">Posteado 19-03-2019</small></div></div>                </div>
+                        </div><!--/.col-md-3-->
+
+
+
+
+                        <div class="col-md-3 col-sm-6">
+                            <h4><div class="1well well4-sm"><a href="Politicas.php"><font style="color:#FFFFFF;">Términos y condiciones</font></a></div></h4>
+                            <address>
+                                <strong>Multicinema</strong><br/>
+                                    Bulevar Universitario<br/>
+                                        Col. Centro América<br/>
+                                            Santa Fé, San Salvador<br/>
+                                                <abbr title="Phone">Tel:</abbr> 2271 1079
+                                                </address>
+                                                <h4>Nuevas noticias</h4>
+                                                <form role="form" method="post" action="Guardar_correo.php">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" autocomplete="off" name="correo" placeholder="Ingresa tu correo" />
+                                                            <span class="input-group-btn">
+                                                                <!--  <button class="btn btn-danger" type="button">Suscribete!</button> -->
+                                                            </span>
+                                                    </div>
+                                                </form>
+                                                </div> <!--/.col-md-3-->
+                                                </div>
+                                                </div>
+                                                </section>
+            
+            
+    </h:body>
+    <h:outputScript library="js" name="bootstrap.js"></h:outputScript>
+    <h:outputScript library="js" name="mdb.js"></h:outputScript>
+</html>

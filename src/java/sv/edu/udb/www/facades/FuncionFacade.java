@@ -5,10 +5,15 @@
  */
 package sv.edu.udb.www.facades;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import sv.edu.udb.www.entities.Funcion;
+import sv.edu.udb.www.entities.Usuario;
+import sv.edu.udb.www.util.JPAUtil;
+import sv.edu.udb.www.util.JSFUtil;
 
 /**
  *

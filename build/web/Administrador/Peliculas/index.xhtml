@@ -1,0 +1,161 @@
+<ui:composition template="/WEB-INF/administrative_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Multicinema-Administrador-Peliculas</ui:define>
+
+     <ui:define name="options">
+        
+        <div class="list-group list-group-flush" >
+            <a href="../index.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-chart-pie mr-5">DashBoard</i>
+            </a>
+            <a href="index.xhtml" class="list-group-item active waves-effect">
+                <i class="fas fa-video mr-3">Peliculas</i>
+            </a>
+            <a href="../usuarios.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-users mr-4"> Usuarios</i>
+            </a>
+            <a href="../idiomas.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-language mr-5">Idiomas</i>
+            </a>
+            <a href="../generos.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-tag mr-3">Generos</i>
+            </a>
+            <a href="../clasificacion.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-film mr-3">Clasificación</i>
+            </a>
+            <a href="../cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
+            </a>
+            <h:form>
+             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
+             </p:commandButton>
+            </h:form>
+        </div>
+    </ui:define>
+    
+    <ui:define   name="content">
+        <!-- Inicio de la Programación toxica-->
+
+        <h:form id="datatablePelicula">
+            <h:commandButton action="insertar.xhtml" class="btn btn-success" value="Insertar"></h:commandButton>
+            <h:dataTable id="peliculasTable" value="#{peliculasController.getPeliculas()}"
+                         var="p"
+                         styleClass="align-middle table table-striped">
+                <h:column >
+                    <f:facet name="header">
+                        ID
+                    </f:facet>
+                    #{p.id}
+
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Titulo
+                    </f:facet>
+                    #{p.titulo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Subtitulos
+                    </f:facet>
+                    #{peliculasController.displaySubtitulos(p.subtitulada)}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Idiomas
+                    </f:facet>
+                    <ui:repeat var="i" value="#{p.idiomaList}" offset="0" size="#{p.idiomaList.size()}"  step="1">
+                        #{i.idioma}<br/>
+                    </ui:repeat>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Clasificacion
+                    </f:facet>
+                    #{p.clasificacion.clasificacion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Generos
+                    </f:facet>
+                    <ui:repeat var="g" value="#{p.generoList}" offset="0" size="#{p.generoList.size()}"  step="1">
+                        #{g.genero}<br/>
+                    </ui:repeat>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Actores
+                    </f:facet>
+                    <ui:repeat var="a" value="#{p.actoresList}" offset="0" size="#{p.actoresList.size()}"  step="1">
+                        #{a.nombre}<br/>
+                    </ui:repeat>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Actores
+                    </f:facet>
+                    <ui:repeat var="d" value="#{p.directoresList}" offset="0" size="#{p.directoresList.size()}"  step="1">
+                        #{d.nombre}<br/>
+                    </ui:repeat>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Duracion
+                    </f:facet>
+                    #{p.duracion}
+                </h:column>
+
+
+                <h:column>
+                    <f:facet name="header">
+                        Sinopsis
+                    </f:facet>
+                    #{p.sinopsis}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Fecha de estreno
+                    </f:facet>
+                    <h:outputText value="#{p.estreno}">
+                        <f:convertDateTime pattern="yyyy/MM/dd"/>
+                    </h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        Imagen
+                    </f:facet>
+                    <img src="data:image/png;base64,#{peliculasController.displayImagen(p.imagen)}" width="150" height="130"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Operaciones
+                    </f:facet>
+
+                    <h:commandButton class="btn btn-danger" action="#{peliculasController.eliminarPelicula(p.id)}"
+                                     onclick="return confirmarEliminacion();"
+                                     value="Delete">
+                        
+                    </h:commandButton>
+                    <h:commandButton class="btn btn-warning" action="editar.xhtml" value="Editar">
+                        <f:param name="id" value="#{p.id}"/>
+                </h:commandButton>
+            </h:column>
+
+        </h:dataTable>
+    </h:form>
+        <h:outputScript>
+            function confirmarEliminacion(){
+                return confirm("¿Está seguro que desea eliminar esta pelicula");
+            }
+         </h:outputScript>
+
+
+    <!-- Fin Programación toxica-->
+</ui:define>
+</ui:composition>

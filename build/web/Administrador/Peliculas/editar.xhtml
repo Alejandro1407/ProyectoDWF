@@ -1,0 +1,121 @@
+<ui:composition template="/WEB-INF/administrative_template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"  
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Multicinema-Administrador-Peliculas</ui:define>
+    
+ <ui:define name="options">
+        
+        <div class="list-group list-group-flush" >
+            <a href="../index.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-chart-pie mr-5">DashBoard</i>
+            </a>
+            <a href="index.xhtml" class="list-group-item active waves-effect">
+                <i class="fas fa-video mr-3">Peliculas</i>
+            </a>
+            <a href="../usuarios.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-users mr-4"> Usuarios</i>
+            </a>
+            <a href="../idiomas.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-language mr-5">Idiomas</i>
+            </a>
+            <a href="../generos.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-tag mr-3">Generos</i>
+            </a>
+            <a href="../clasificacion.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-film mr-3">Clasificación</i>
+            </a>
+            <a href="../cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
+            </a>
+            <h:form>
+             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
+             </p:commandButton>
+            </h:form>
+        </div>
+    </ui:define>
+    
+    <ui:define   name="content">
+        <!-- Inicio de la Programación toxica-->
+        #{peliculasController.loadPelicula()}
+        <h:form id="editarPelicula" enctype="multipart/form-data">
+            <h:panelGroup layout="block" styleClass="alert alert-danger"
+                          rendered="#{not empty facesContext.messageList}">
+                <h:messages />
+            </h:panelGroup>
+            <h:panelGrid columns="4" styleClass="table" cellpadding="5" columnClasses="label, value">
+                <h:outputLabel for="titulo" value="Titulo:"/>
+                <h:inputText id="titulo" styleClass="form-control"
+                             value="#{peliculasController.pelicula.titulo}"
+                             required="true"
+                             requiredMessage="Debes ingresar el titulo"/>
+
+                <h:outputLabel for="duracion" value="Duracion:"/>
+                <h:inputText id="duracion" styleClass="form-control"
+                             value="#{peliculasController.pelicula.duracion}"
+                             required="true"
+                             requiredMessage="Debes ingresar la duracion"
+                             converterMessage="Solo numeros."/>
+                <h:outputLabel for="sinopsis" value="Sinopsis:"/>
+                <h:inputTextarea id="sinopsis" styleClass="form-control"
+                                 value="#{peliculasController.pelicula.sinopsis}"
+                                 required="true"
+                                 requiredMessage="Debes ingresar la sipnosis"/>
+                <h:outputLabel for="subtitulos" value="Subtitulos:"/>
+                <h:selectOneMenu id="subtitulos" styleClass="form-control"
+                                 value="#{peliculasController.pelicula.subtitulada}">
+                    <f:selectItem itemValue="0" itemLabel="No"/>
+                    <f:selectItem itemValue="1" itemLabel="Si"/>
+
+                </h:selectOneMenu>
+                <h:outputLabel for="actores" value="Actores:"/>
+                <p:selectManyMenu scrollHeight="100" filter="true" showCheckbox="true" filterMatchMode="contains" styleClass="form-control" style="height: 150px;" value="#{peliculasController.actores}">
+                    <f:selectItems value="#{produccionController.obtenerActores()}" var="a"
+                                   itemValue="#{a.id}" itemLabel="#{a.nombre}">
+                    </f:selectItems>
+                </p:selectManyMenu>
+                <h:outputLabel for="directores" value="Directores:"/>
+                <p:selectManyMenu scrollHeight="100" filter="true" showCheckbox="true" filterMatchMode="contains"  styleClass="form-control" style="height: 150px;" value="#{peliculasController.directores}">
+                    <f:selectItems value="#{produccionController.obtenerDirectores()}" var="d"
+                                   itemValue="#{d.id}" itemLabel="#{d.nombre}">
+                    </f:selectItems>
+                </p:selectManyMenu>
+                <h:outputLabel for="generos" value="Generos:"/>
+                <p:selectManyMenu scrollHeight="100" filter="true" showCheckbox="true" filterMatchMode="contains" styleClass="form-control" style="height: 150px;" value="#{peliculasController.generos}">
+                    <f:selectItems value="#{generosController.obtenerGeneros()}" var="g"
+                                   itemValue="#{g.id}" itemLabel="#{g.genero}">
+                    </f:selectItems>
+                </p:selectManyMenu>
+                <h:outputLabel for="idiomas" value="Idiomas:"/>
+                <p:selectManyMenu scrollHeight="100" filter="true" showCheckbox="true" filterMatchMode="contains" styleClass="form-control" style="height: 150px;"  value="#{peliculasController.idiomas}">
+                    <f:selectItems value="#{idiomasController.obtenerIdiomas()}" var="i"
+                                   itemValue="#{i.id}" itemLabel="#{i.idioma}">
+                    </f:selectItems>
+                </p:selectManyMenu>
+
+                <h:outputLabel for="clasificacion" value="Clasificacion:"/>
+                <h:selectOneMenu id="clasificacion" styleClass="form-control"
+                                 value="#{peliculasController.clasificacion}">
+                    <f:selectItems value="#{clasificacionController.obtenerClasificaciones()}" var="c" itemValue="#{c.id}" itemLabel="#{c.clasificacion}"></f:selectItems>
+                </h:selectOneMenu>
+                <h:outputLabel for="imagen" value="Imagen:"/>
+                <h:inputFile id="imagen" styleClass="form-control" value="#{peliculasController.fileUpload}"/>
+                <h:outputLabel for="estreno" value="Fecha de estreno:"/>
+                <p:datePicker id="estreno" value="#{peliculasController.pelicula.estreno}" showIcon="true"
+                              required="true"
+                              requiredMessage="Debe ingresar fecha de estreno">
+                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                </p:datePicker>
+            </h:panelGrid>
+            <h:commandButton value="Editar" styleClass="btn btn-success"
+                             action="#{peliculasController.editarPelicula()}" style="margin-right:10px">
+                
+            </h:commandButton>
+
+        </h:form>
+        <!-- Fin Programación toxica-->
+    </ui:define>
+</ui:composition>
