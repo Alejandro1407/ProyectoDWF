@@ -13,7 +13,7 @@
              <a href="index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-chart-pie mr-5">DashBoard</i>
             </a>
-            <a href="peliculas.xhtml" class="list-group-item list-group-item-action waves-effect">
+            <a href="Peliculas/index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-video mr-3">Peliculas</i>
             </a>
             <a href="usuarios.xhtml" class="list-group-item list-group-item-action waves-effect">
@@ -59,7 +59,7 @@
                         <p:inputText id="form2" class="form-control" value="#{usuariosController.usuario.nombre}" required="true" placeholder="Nombre" 
                                      requiredMessage="Debe ingresar un nombre"
                                      validatorMessage="Nombre Invalido">
-                                     <f:validateRegex pattern="(^[A-Za-z]{4,}\s?[A-Za-z]{4,}){1,}$"/>
+                                     <f:validateRegex pattern="^[A-Za-z]{4,}\s{0,1}$"/>
                         </p:inputText> 
                          <p:inputText  class="form-control" value="#{usuariosController.usuario.telefono}" required="true" placeholder="XXXX-XXXX" 
                                      requiredMessage="Debe ingresar un numero"
@@ -79,7 +79,7 @@
                         <p:inputText  class="form-control" value="#{usuariosController.usuario.correo}" required="true" placeholder="alguien@example.com" 
                                      requiredMessage="Debe ingresar un email"
                                      validatorMessage="Email Invalido">
-                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                     <f:validateRegex pattern=""/>
                         </p:inputText>
                     <p:password id="txtnewpass" class="form-control" value="#{usuariosController.usuario.password}" required="true" placeholder="********"
                                         requiredMessage="Debe ingresar una contraseña"

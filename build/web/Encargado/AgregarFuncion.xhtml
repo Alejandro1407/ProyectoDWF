@@ -1,0 +1,84 @@
+<ui:composition template="/WEB-INF/administrative_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">Multicinema-Administrador</ui:define>
+    
+    <ui:define name="options">
+        
+        <div class="list-group list-group-flush" >
+            <a href="index.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-chart-pie mr-5">DashBoard</i>
+            </a>
+            <a href="peliculas.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-video mr-3">Peliculas</i>
+            </a>
+             <a href="funciones.xhtml" class="list-group-item active waves-effect">
+               <i class="fas fa-ticket-alt">Funciones</i>
+            </a>
+            <a href="dependientes.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-users mr-4"> Dependientes</i>
+            </a>
+            <a href="cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
+            </a>
+            <h:form>
+                <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
+                </p:commandButton>
+            </h:form>
+            
+        </div>
+        
+    </ui:define>
+    
+    
+    
+    <ui:define name="content">
+        <!-- Inicio de la Programación toxica-->
+        
+        <a href="funciones.xhtml" class="btn btn-success">Volver</a>
+        <br/>
+        <div class="d-flex justify-content-center">
+            <div class="shadow-none w-50 p-5 ">        
+                <h:form>
+                    <h3 class="grey-text text-center">Agregar Funcion</h3>
+                    <h:panelGrid columns="2" styleClass="table" cellpadding="5" columnClasses="label, value">
+                       
+                            <p:outputLabel for="codigo" value="Codigo:" />
+                            <p:inputText id="codigo" class="form-control" value="#{funcionController.funcion.codigo}" required="true" placeholder="DPL503-1" 
+                                             requiredMessage="Debe ingresar un codigo para la funcion">
+                            </p:inputText>
+                        
+                            <p:outputLabel for="pelicula" value="Pelicula:"/>
+                            <p:selectOneMenu id="pelicula" value="#{funcionController.pelicula}">
+                                <f:selectItems value="#{funcionController.obtenerPeliculas()}" var="pelicula" itemLabel="#{pelicula.titulo}" itemValue="#{pelicula.id}"></f:selectItems>
+                            </p:selectOneMenu>
+                        
+                            <p:outputLabel value="Sala:" for="sala"/>
+                            <p:selectOneMenu id="sala" value="#{funcionController.sala}">
+                                <f:selectItems value="#{funcionController.obtenerSalas()}" var="sala" itemValue="#{sala.id}" itemLabel="Sala #{sala.id}"></f:selectItems>
+                            </p:selectOneMenu>
+                        
+                            <p:outputLabel for="idioma" value="Idioma:"/>
+                            <p:selectOneMenu id="idioma" value="#{funcionController.idioma}">
+                                <f:selectItems value="#{funcionController.obtenerIdiomas()}" var="idioma" itemValue="#{idioma.id}" itemLabel="#{idioma.idioma}"></f:selectItems>
+                            </p:selectOneMenu>
+                        
+                            <p:outputLabel for="horario" value="Horario:" />
+                            <p:datePicker id="horario" value="#{funcionController.funcion.horario}" showIcon="true"
+                                    required="true"
+                                    requiredMessage="Debe ingresar un horario">
+                            </p:datePicker>
+                </h:panelGrid>        	
+                <p:messages closable="true" />
+                <h:commandButton value="Aceptar" action="#{funcionController.insertarFuncion()}" class="btn btn-success"  />
+                </h:form>
+            </div>
+        </div>
+        
+        <!-- Fin Programación toxica-->
+    </ui:define>
+</ui:composition>

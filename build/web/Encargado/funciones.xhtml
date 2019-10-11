@@ -25,8 +25,11 @@
             <a href="cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
             </a>
-             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
-             </p:commandButton>
+            <h:form>
+                <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
+                </p:commandButton>
+            </h:form>
+            
         </div>
         
     </ui:define>
@@ -36,7 +39,59 @@
     <ui:define name="content">
         <!-- Inicio de la Programación toxica-->
         
-        CRUD Usuarios
+        <a href="AgregarFuncion.xhtml" class="btn btn-success">Agregar funcion</a>
+        <p:messages closable="true"/>
+	<br/>
+        <h3 class="grey-text text-center w-500">Funciones</h3><br/>
+        <div class="d-flex justify-content-center">
+            
+            <h:dataTable value="#{funcionController.obtenerFunciones()}" var="funcion" class="table table-responsive w-responsive table-bordered table-striped h-100">
+                <h:column>
+                    <f:facet name="header">Codigo</f:facet>
+                    #{funcion.codigo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pelicula</f:facet>
+                    #{funcion.pelicula.titulo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Sala</f:facet>
+                    #{funcion.sala.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Idioma</f:facet>
+                    #{funcion.idioma.idioma}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Horario</f:facet>
+                    <h:outputText value="#{funcion.horario}">
+                        <f:convertDateTime pattern="yyyy/MM/dd"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">3D</f:facet>
+                    #{funcion.funcion3d}
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Acciones</f:facet>
+                    <h:form>
+                        <h:commandButton class="btn btn-warning" action="editarFuncion.xhtml" value="Editar">
+                            <f:param name="id" value="#{funcion.codigo}"/>
+                        </h:commandButton>
+                        <h:commandButton action="#{funcionController.eliminarFuncion()}" class="btn btn-danger" onclick="return confirmarEliminacion();" value="Eliminar">
+                            <f:param name="id" value="#{funcion.codigo}" />
+                        </h:commandButton>
+                    </h:form>
+                </h:column>
+                
+            </h:dataTable>
+        </div>
+        <h:outputScript>
+            function confirmarEliminacion(){
+                return confirm("¿Está seguro que desea eliminar esta función");
+            }
+         </h:outputScript>
         
         <!-- Fin Programación toxica-->
     </ui:define>

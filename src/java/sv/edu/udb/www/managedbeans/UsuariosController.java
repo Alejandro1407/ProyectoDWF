@@ -88,8 +88,10 @@ public class UsuariosController implements Serializable{
                 JSFUtil.addErrorMessage("¡Error! Correo electronico ya registrado");
                 return;
             }
+            
             usuario.setEnabled(true);
             usuario.setTipo(tipo);
+            usuario.setPassword(JSFUtil.HashPassword(usuario.getPassword()));
             usuarioFacade.create(usuario);
             JSFUtil.addSucessMessage("¡Exito! usuario Insertado correctamente");
         }catch(Exception e){

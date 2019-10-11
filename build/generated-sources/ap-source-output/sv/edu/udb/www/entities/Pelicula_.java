@@ -11,7 +11,7 @@ import sv.edu.udb.www.entities.Genero;
 import sv.edu.udb.www.entities.Idioma;
 import sv.edu.udb.www.entities.Produccion;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-10T20:51:13")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-11T07:53:07")
 @StaticMetamodel(Pelicula.class)
 public class Pelicula_ { 
 
