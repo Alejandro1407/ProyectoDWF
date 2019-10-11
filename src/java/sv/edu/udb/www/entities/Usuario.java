@@ -58,7 +58,6 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 150)
     private String correo;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 150)
     private String password;
     @Basic(optional = false)
@@ -180,6 +179,9 @@ public class Usuario implements Serializable {
     
     public boolean getEnabled(){
         return this.enabled;
+    }
+    public void setEnabled(boolean Enabled){
+        this.enabled = Enabled;
     }
 
     @Override

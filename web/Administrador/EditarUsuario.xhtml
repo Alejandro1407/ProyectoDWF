@@ -47,18 +47,23 @@
     
     <ui:define name="content">
         <!-- Inicio de la Programación toxica-->
+        #{usuariosController.loadUsuario()}
         <a href="usuarios.xhtml" class="btn btn-success">Volver</a>
         <br/>
         <div class="d-flex justify-content-center">
             
             <div class="shadow-none w-50 p-6 ">        
-                <h:form>
+               
                     <h3 class="grey-text text-center">Agregar Usuario</h3>
                     <div class="md-form">
                         <div class="form-group mx-sm-2 mb-2">
+                      <h:form>
+                          <p:inputText type="hidden" value="#{usuariosController.usuario.id}"/>
+                          <p:inputText type="hidden" value="#{usuariosController.usuario.password}"/>
+                         
                         <p:inputText id="form2" class="form-control" value="#{usuariosController.usuario.nombre}" required="true" placeholder="Nombre" 
-                                     requiredMessage="Debe ingresar un nombre"
-                                     validatorMessage="Nombre Invalido">
+                                     requiredMessage="Debe ingresar un email"
+                                     validatorMessage="Email Invalido">
                                      <f:validateRegex pattern="(^[A-Za-z]{4,}\s?[A-Za-z]{4,}){1,}$"/>
                         </p:inputText> 
                          <p:inputText  class="form-control" value="#{usuariosController.usuario.telefono}" required="true" placeholder="XXXX-XXXX" 
@@ -81,20 +86,16 @@
                                      validatorMessage="Email Invalido">
                                      <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
                         </p:inputText>
-                    <p:password id="txtnewpass" class="form-control" value="#{usuariosController.usuario.password}" required="true" placeholder="********"
-                                        requiredMessage="Debe ingresar una contraseña"
-                                        validatorMessage="Longitud minima: 8 Caracteres">
-                                        <f:validateRegex pattern="^[A-za-z]{8}$"/>   
-                    </p:password>
                         <h:selectOneMenu id="tipo" value="#{usuariosController.tipo.id}" style="width:125px">
                             <f:selectItems value="#{usuariosController.obtenerTipos()}"
                                               var="t" itemLabel="#{t.tipo}" itemValue="#{t.id}"/>
-                       </h:selectOneMenu>                        
+                       </h:selectOneMenu>  
+                    <p:messages closable="true" />
+                    <h:commandButton value="Aceptar" action="#{usuariosController.editarUsuario()}" class="btn btn-success"  />
+                </h:form>
                         </div>
                     </div>	
-                    <p:messages closable="true" />
-                    <h:commandButton value="Aceptar" action="#{usuariosController.insertarUsuario()}" class="btn btn-success"  />
-                </h:form>
+                  
                 </div>
         </div>
             

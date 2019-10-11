@@ -7,7 +7,7 @@ import sv.edu.udb.www.entities.Asiento;
 import sv.edu.udb.www.entities.Funcion;
 import sv.edu.udb.www.entities.Usuario;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-10T15:12:13")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-10-10T20:51:13")
 @StaticMetamodel(Entrada.class)
 public class Entrada_ { 
 

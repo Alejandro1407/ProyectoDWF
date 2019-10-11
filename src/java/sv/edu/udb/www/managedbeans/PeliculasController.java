@@ -170,6 +170,14 @@ public class PeliculasController implements Serializable {
         }
         this.pelicula = peliculaFacade.find(id);
     }
+    public List<Pelicula> obtenerPeliculas(){
+        try{
+            return peliculaFacade.findAll();
+        }catch(Exception e){
+            return null;
+        }
+    }
+    
     /**
      * Método que permite modificar pelicula
      *
@@ -178,17 +186,10 @@ public class PeliculasController implements Serializable {
      * 
      */
     public String editarPelicula() throws IOException{
-        byte[] bytes;
         if(fileUpload != null){
-            bytes = IOUtils.readFully(fileUpload.getInputStream(), -1, false);  
-        }
-         else{
-            BufferedImage bImage = ImageIO.read(getClass().getResource("/resources/default-image.jpg"));
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ImageIO.write(bImage, "jpg", bos );
-            bytes = bos.toByteArray(); 
-        }
+        byte[] bytes = IOUtils.readFully(fileUpload.getInputStream(), -1, false);
         pelicula.setImagen(bytes);
+        }
         pelicula.setClasificacion(clasificacionFacade.find(clasificacion));
         List<Genero> gl = new ArrayList<>();
         generos.forEach((g) -> {

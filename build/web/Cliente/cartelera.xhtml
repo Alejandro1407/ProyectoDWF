@@ -12,8 +12,9 @@
         <!-- Inicio de Programacion toxica-->
         <main class="pt-5 mx-lg-5">
             <div class="container-fluid mt-3 ">
-                 <h2 class="grey-text text-center w-100">Peliculas</h2><br/>
+                 <h2 class="grey-text text-center w-100">Cartelera</h2><br/>
                  <div class="row pl-5 pr-5 d-flex justify-content-center">
+                     
                    <c:forEach items="#{peliculasController.obtenerPeliculas()}" var="pelicula">
                     <div class="card col-3 mr-2">
                         <img class="card-img-top p-2 pt-3" width="400" height="300" src="data:image/png;base64,#{peliculasController.displayImagen(pelicula.imagen)}" alt="Card image cap" />

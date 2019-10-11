@@ -5,29 +5,43 @@
  */
 package sv.edu.udb.www.managedbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import sv.edu.udb.www.entities.Oficio;
 import sv.edu.udb.www.entities.Produccion;
 import sv.edu.udb.www.facades.ProduccionFacade;
+import sv.edu.udb.www.util.JSFUtil;
 
-/**
- *
- * @author kevin
- */
+
 @ManagedBean
 @ViewScoped
-public class ProduccionController {
+public class ProduccionController implements Serializable{
+
+   
     @EJB
     private ProduccionFacade produccionFacade = new ProduccionFacade();
 
-    private Produccion produccion = new Produccion();
+    private Produccion produccion = null;
 
-    /**
-     * Creates a new instance of Producciones
-     */
+    @PostConstruct
+    public void init(){
+        produccion = new Produccion();
+    }
+    
+     public Produccion getProduccion() {
+        return produccion;
+    }
+    
+    public void setProduccion(Produccion produccion) {
+        this.produccion = produccion;
+    }
     public ProduccionController() {
     }
     public List<Produccion> obtenerDirectores(){
@@ -42,6 +56,52 @@ public class ProduccionController {
         return a;
         
     }
+    public void eliminarDirector(){
+    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        int id = Integer.parseInt(request.getParameter("id"));
+        try{
+             setProduccion(produccionFacade.find(id));   
+           
+            produccionFacade.remove(getProduccion());
+            JSFUtil.addSucessMessage("¡Exito! Eliminado correctamente");
+        }catch(Exception e){
+            JSFUtil.addErrorMessage("¡Error! No se pudo eliminar");
+        }
+        
+    }
+    public void insertarDirector(){
+     try{
+            produccion.setId(1);
+            produccion.setOficio(new Oficio(1,"Director"));
+            produccionFacade.create(produccion);
+            JSFUtil.addSucessMessage("¡Exito! Director Insertado correctamente");
+        }catch(Exception e){
+            JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+        }
+    }
+        public void eliminarActor(){
+    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        int id = Integer.parseInt(request.getParameter("id"));
+        try{
+            setProduccion(produccionFacade.find(id));   
+            produccionFacade.remove(getProduccion());
+            JSFUtil.addSucessMessage("¡Exito! Eliminado correctamente");
+        }catch(Exception e){
+            JSFUtil.addErrorMessage("¡Error! No se pudo eliminar");
+        }
+        
+    }
+    public void insertarActor(){
+     try{
+            produccion.setId(1);
+            produccion.setOficio(new Oficio(2,"Actor"));
+            produccionFacade.create(produccion);
+            JSFUtil.addSucessMessage("¡Exito! Actor Insertado correctamente");
+        }catch(Exception e){
+            JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+        }
+    }
+    
     public List<Produccion> obtenerActores(){
         List<Produccion> p = produccionFacade.findAll();
         List<Produccion> d = new ArrayList<>();

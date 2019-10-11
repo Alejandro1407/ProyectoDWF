@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/alejo/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/www/managedbeans/PeliculasController.java</file>
-            <file>file:/C:/Users/alejo/Documents/NetBeansProjects/ProyectoDWF/web/Administrador/Peliculas/editar.xhtml</file>
-            <file>file:/C:/Users/alejo/Documents/NetBeansProjects/ProyectoDWF/web/Administrador/Peliculas/insertar.xhtml</file>
+            <file>file:/C:/Users/alejo/Documents/NetBeansProjects/ProyectoDWF/web/Administrador/AgregarActor.xhtml</file>
+            <file>file:/C:/Users/alejo/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/www/managedbeans/ProduccionController.java</file>
+            <file>file:/C:/Users/alejo/Documents/NetBeansProjects/ProyectoDWF/web/Administrador/actores.xhtml</file>
+            <file>file:/C:/Users/alejo/Documents/NetBeansProjects/ProyectoDWF/src/java/sv/edu/udb/www/managedbeans/GenerosController.java</file>
         </group>
     </open-files>
 </project-private>

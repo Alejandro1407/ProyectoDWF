@@ -13,7 +13,7 @@
              <a href="index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-chart-pie mr-5">DashBoard</i>
             </a>
-             <a href="Peliculas/index.xhtml" class="list-group-item list-group-item-action waves-effect">
+            <a href="Peliculas/peliculas.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-video mr-3">Peliculas</i>
             </a>
             <a href="usuarios.xhtml" class="list-group-item active waves-effect">
@@ -28,11 +28,19 @@
             <a href="clasificacion.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-film mr-3">Clasificación</i>
             </a>
+             <a href="actores.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-user-tie mr-3">Actores</i>
+            </a>
+            <a href="directores.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-user-tie mr-3">Directores</i>
+            </a>
             <a href="cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
             </a>
+            <h:form>
              <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
              </p:commandButton>
+            </h:form>
         </div>
         
     </ui:define>
@@ -40,10 +48,53 @@
     
     
     <ui:define name="content">
-        <!-- Inicio de la Programación toxica-->
-        
-        CRUD Usuarios
-        
+        <a href="AgregarUsuario.xhtml" class="btn btn-success">Agregar</a>
+        <br/>
+         <h3 class="grey-text text-center w-100">Usuarios</h3><br/>
+         <p:messages closable="true"/>
+          <div class="ml-auto mr-auto d-block w-50"> 
+                <h:dataTable value="#{usuariosController.obtenerUsuarios()}" var="usuario" class="table table-responsive w-70 table-striped h-100">
+                <h:column>
+                    <f:facet name="header">#</f:facet>
+                    #{usuario.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nombre</f:facet>
+                    #{usuario.nombre}
+                </h:column>
+            
+                <h:column>
+                    <f:facet name="header">DUI</f:facet>
+                    #{usuario.dui}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Correo Electronico</f:facet>
+                    #{usuario.correo}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Tipo</f:facet>
+                    #{usuario.tipo.tipo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Acciones</f:facet>
+                    <h:form>
+                        <h:commandButton action="EditarUsuario.xhtml" class="btn btn-warning" value="Editar" >
+                            <f:param name="id" value="#{usuario.id}" />
+                        </h:commandButton>
+                        <h:commandButton action="#{usuariosController.eliminarUsuario()}" class="btn btn-danger" onclick="return confirmarEliminacion();" value="Eliminar">
+                            <f:param name="id" value="#{usuario.id}" />
+                        </h:commandButton>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </div>
         <!-- Fin Programación toxica-->
+         
+                   <h:outputScript>
+            function confirmarEliminacion(){
+                return confirm("¿Está seguro que desea eliminar este usuario");
+            }
+         </h:outputScript>
+      
     </ui:define>
 </ui:composition>

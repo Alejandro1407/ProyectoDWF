@@ -28,6 +28,12 @@
             <a href="../clasificacion.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-film mr-3">Clasificación</i>
             </a>
+             <a href="../actores.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-user-tie mr-3">Actores</i>
+            </a>
+            <a href="../directores.xhtml" class="list-group-item list-group-item-action waves-effect">
+                <i class="fas fa-user-tie mr-3">Directores</i>
+            </a>
             <a href="../cambiar.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
             </a>
@@ -107,7 +113,7 @@
                 <p:datePicker id="estreno" value="#{peliculasController.pelicula.estreno}" showIcon="true"
                               required="true"
                               requiredMessage="Debe ingresar fecha de estreno">
-                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    <f:convertDateTime pattern="MM-dd-yy"/>
                 </p:datePicker>
             </h:panelGrid>
             <h:commandButton value="Editar" styleClass="btn btn-success"
