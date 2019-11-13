@@ -36,15 +36,15 @@
                                 <p:inputText id="form2" class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
                                      requiredMessage="Debe ingresar un email"
                                      validatorMessage="Email Invalido">
-                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                     <f:validateRegex pattern="^((\w){1,}(\.){0,1}){1,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
                                 </p:inputText>
                             </div>
                             <div class="md-form">
                                 <i class="fas fa-lock prefix grey-text"></i>
                                 <p:password id="txtpass" class="form-control" value="#{sesion.usuario.password}" required="true" placeholder="********"
                                         requiredMessage="Debe ingresar una contraseña"
-                                        validatorMessage="Contraseña no valida">
-                                        <f:validateRegex pattern="^[A-za-z]{8}$"/>   
+                                        validatorMessage="Contraseña no cumple formato">
+                                        <f:validateRegex pattern="^[A-za-z0-9]{8,}$"/>   
                                 </p:password>
                             </div>
                             <div class="text-center">
@@ -93,7 +93,7 @@
                       <p:inputText id="form2" class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
                                      requiredMessage="Debe ingresar un email valido para recuperar su contraseña"
                                      validatorMessage="Email ingresado no es valido">
-                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                     <f:validateRegex pattern="^((\w){1,}(\.){0,1}){1,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
                       </p:inputText>
                   </div>
                   <p class="grey-text">Se te enviara tu nueva contraseña por Email</p>
@@ -124,7 +124,7 @@
                     <p:inputText class="form-control" value="#{sesion.usuario.nombre}" required="true" placeholder="Kevin Matthew Cruz Pablo" 
                                      requiredMessage="Debe ingresar un nombre"
                                      validatorMessage="Nombre ingresado no valido">
-                                     <f:validateRegex pattern="^[A-Za-z]{4,}$"/>
+                                     <f:validateRegex pattern="^[A-Za-z]{4,}(( ){0,1}[A-Za-z]{4,}){0,}$"/>
                       </p:inputText>
                   </div>
                     <div class="md-form mb-5">
@@ -132,7 +132,7 @@
                     <p:inputText class="form-control" value="#{sesion.usuario.direccion}" required="true" placeholder="Soyapango, San Salvador" 
                                      requiredMessage="Debe ingresar una direccion"
                                      validatorMessage="Direccion ingresada no valido">
-                                     <f:validateRegex pattern="^[A-Za-z]{5,}$"/>
+                                     <f:validateRegex pattern="^[A-Za-z]{5,}(((\,( )|\,){0,1}[A-Za-z]{2,}|( ){0,1}){1,}){0,}$"/>
                       </p:inputText>
                   </div>
                   <div class="md-form mb-5">
@@ -149,7 +149,7 @@
                      <p:inputText  class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
                                      requiredMessage="Debe ingresar un email"
                                      validatorMessage="Email ingresado no es valido">
-                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                     <f:validateRegex pattern="^((\w){1,}(\.){0,1}){1,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
                       </p:inputText>
                   </div>
 
@@ -167,7 +167,7 @@
                     <p:password id="txtnewpass" class="form-control" value="#{sesion.usuario.password}" required="true" placeholder="********"
                                         requiredMessage="Debe ingresar una contraseña"
                                         validatorMessage="Longitud minima: 8 Caracteres">
-                                        <f:validateRegex pattern="^[A-za-z]{8}$"/>   
+                                        <f:validateRegex pattern="^[A-za-z0-9]{8,}$"/>   
                     </p:password>
                   </div>
                       <p:messages closable="true" id="messages" />

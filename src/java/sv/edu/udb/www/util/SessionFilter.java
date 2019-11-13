@@ -45,15 +45,15 @@ public class SessionFilter implements Filter {
         
         String loginURI = peticion.getContextPath() + "/";
         
-       
+        String path = peticion.getRequestURI().substring(peticion.getContextPath().length());
         String debug = peticion.getRequestURI().substring(peticion.getContextPath().length());
         boolean loggedIn = (session != null && session.getAttribute("Session") != null);
         boolean IsLoginRequest = (peticion.getRequestURI().equals(loginURI) || peticion.getRequestURI().equals(loginURI + "index.xhtml") );
         
-        if(peticion.getRequestURI().contains("javax.faces.resource")){
+        if(peticion.getRequestURI().contains("javax.faces.resource") || path.startsWith("/Cliente/")){
            chain.doFilter(request, response);
            return;
-        }
+        }            
         if(!loggedIn && IsLoginRequest){
             chain.doFilter(request, response);
             return;
@@ -66,7 +66,6 @@ public class SessionFilter implements Filter {
 
         if(loggedIn){
             Usuario u = (Usuario) session.getAttribute("Session");
-            String path = peticion.getRequestURI().substring(peticion.getContextPath().length());
             
             if(path.startsWith("/Administrador/") && !u.getTipo().getTipo().equals("Administrador")){
                 //JSFUtil.addErrorMessage("Debe iniciar sesion");
@@ -83,10 +82,7 @@ public class SessionFilter implements Filter {
                 respuesta.sendRedirect(loginURI);
             }else{ chain.doFilter(request, response); return;}
             
-            if(path.startsWith("/Cliente/") && !u.getTipo().getTipo().equals("Cliente")){
-                //JSFUtil.addErrorMessage("Debe iniciar sesion");
-                respuesta.sendRedirect(loginURI);
-            }else{ chain.doFilter(request, response); return;}
+
         }
         
     }
