@@ -1,3 +1,3 @@
 <%
-    response.sendRedirect("/Cliente/index.xhtml");
+    response.sendRedirect("Cliente/index.xhtml");
 %>

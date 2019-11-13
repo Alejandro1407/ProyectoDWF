@@ -3,7 +3,9 @@
 <html lang="es" 
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,8 +16,8 @@
     <h:body>
         <!-- Header -->
         <nav class="navbar navbar-expand-lg p-0" style="background: linear-gradient(to bottom, #2616F2, #171717);-webkit-box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);
-                                                                    -moz-box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);
-                                                                    box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);">
+             -moz-box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);
+             box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);">
             <div class="container">    
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavBar"
                         aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,123 +47,249 @@
                             <a class="nav-link" href="contactanos.xhtml">Contactanos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contactanos.xhtml">Iniciar Sesión</a>
+                            <a class="nav-link" id="btnmodalLogin" href="inicarsesion.xhtml">Iniciar Sesión</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contactanos.xhtml">Registrarse</a>
+                            <a id="btnmodalRegister" href="registrarse.xhtml" class="nav-link">Registrarse</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!--Header-->
-        
-            <!-- Contenido-->
-            <ui:insert name="content" />
-            <!-- Contenido-->
-            
-            <!-- Footer-->
-            <section id="services" class="mt-5 overflow-hidden" style="background: linear-gradient(to bottom, #FFCB05, #FFCB05);-webkit-box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);
-                                                                        -moz-box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);
-                                                                        box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);padding: 50px 0;">    
-                <div class="containers">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-2">
+
+        <!-- Contenido-->
+        <ui:insert name="content" />
+        <!-- Contenido-->
+
+        <!-- Footer-->
+        <section id="services" class="mt-5 overflow-hidden" style="background: linear-gradient(to bottom, #FFCB05, #FFCB05);-webkit-box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);
+                 -moz-box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);
+                 box-shadow: 1px -2px 13px -3px rgba(0,0,0,0.75);padding: 50px 0;">    
+            <div class="containers">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2">
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="facebook-logo-png-9.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
+                            <div class="media-body">
+                                <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestro Facebook </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
+                                </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Siguenos en Facebook </a></p>
+                            </div>
                         </div>
-                        <div class="col-md-3 col-sm-3">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="facebook-logo-png-9.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestro Facebook </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
-                                    </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Siguenos en Facebook </a></p>
-                                </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-3 col-sm-3">
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="ig.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
+                            <div class="media-body">
+                                <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestro Instagram </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
+                                </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Siguenos en Instagram </a></p>
                             </div>
-                        </div><!--/.col-md-4-->
-                        <div class="col-md-3 col-sm-3">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="ig.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestro Instagram </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
-                                    </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Siguenos en Instagram </a></p>
-                                </div>
+                        </div>
+                    </div><!--/.col-md-4-->
+                    <div class="col-md-3 col-sm-3">
+                        <div class="media">
+                            <div class="pull-left">
+                                <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="app.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
+                            <div class="media-body">
+                                <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestra App </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
+                                </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Próximamente </a></p>
                             </div>
-                        </div><!--/.col-md-4-->
-                        <div class="col-md-3 col-sm-3">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <a href="http://tinyurl.com/fl4gg" target="_blank"><i><h:graphicImage library="images" name="app.png" width="64" height="64" style="border-radius: 7px;"/></i></a>                    </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading"><a href="http://tinyurl.com/fl4gg" target="_blank"> Nuestra App </a></h3><a href="http://tinyurl.com/fl4gg" target="_blank">
-                                    </a><p><a href="http://tinyurl.com/fl4gg" target="_blank">Próximamente </a></p>
-                                </div>
+                        </div>
+                    </div><!--/.col-md-4-->
+                </div>
+            </div>
+        </section>
+
+        <section id="bottom" class="p-3" style="background: linear-gradient(to bottom, #010105, #000000);">    <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="1well well-3sm"><a href="Historia.php"><font style="color:#FFFFFF;"><h4>Quienes somos</h4></font></a></div>
+                        <ul class="arrow">
+                            <li><a href="Historia.php">Historia de la empresa</a></li>
+                            <li><a href="Complejos.php">Complejos</a></li>
+                            <li><a href="Bolsa_trabajo.php">Bolsa de trabajo</a></li>
+                            <li><a href="Contactanos.php">Contáctanos</a></li>
+                        </ul>
+                    </div><!--/.col-md-3-->
+
+                    <div class="col-md-3 col-sm-6">
+                        <div class="1naranja2"><a href="Cartelera.php"><font style="color:#FFFFFF;"><h4>Cartelera</h4></font></a></div>
+                        <div>
+                            <ul class="arrow">
+                                <li><a href="Nuestros_servicios.php">Nuestros Servicios</a></li>
+                                <li><a href="Dulceria.php">Nuestros Productos</a></li>
+                                <li><a href="Festival_cine.php">Festival de cine</a></li>
+                                <li><a href="Rse.php">Responsabilidad Social Empresarial</a></li>
+                                <!--    <li><a href="#">Proximos Estrenos</a></li>
+                                    <li><a href="Preventa.php">Preventa</a></li> -->
+                            </ul>
+                        </div>
+                    </div><!--/.col-md-3-->
+
+
+                    <div class="col-md-3 col-sm-6">
+                        <h4><div class="Foot4ermenu2"><a href="Noticias.php"><font style="color:#FFFFFF;">Noticias</font></a></div></h4>
+                        <div>
+                            <div class="media"><div class="pull-left"><h:graphicImage library="images" name="4.jpg" width="62" height="32" style="border-radius: 7px;"/></div><div class="media-body"><span class="media-heading"><a href="Noticias_buscar.php?id=10">Así es como Visión podría salvar a todos en Vengadores: Endgame</a></span><small class="muted">Posteado 08-01-2019</small></div></div><div class="media"><div class="pull-left"><h:graphicImage library="images" name="frozen-2-imagenes.jpg" width="62" height="32" style="border-radius: 7px;"/></div><div class="media-body"><span class="media-heading"><a href="Noticias_buscar.php?id=12">“Frozen 2”, primer tráiler de la esperada secuela del mayor éxito de Disney</a></span><small class="muted">Posteado 19-03-2019</small></div></div>                </div>
+                    </div><!--/.col-md-3-->
+
+                    <div class="col-md-3 col-sm-6">
+                        <h4><div class="1well well4-sm"><a href="Politicas.php"><font style="color:#FFFFFF;">Términos y condiciones</font></a></div></h4>
+                        <address>
+                            <strong>Multicinema</strong><br/>
+                            Bulevar Universitario<br/>
+                            Col. Centro América<br/>
+                            Santa Fé, San Salvador<br/>
+                            <abbr title="Phone">Tel:</abbr> 2271 1079
+                        </address>
+                        <h4>Nuevas noticias</h4>
+                        <form role="form" method="post" action="Guardar_correo.php">
+                            <div class="input-group">
+                                <input type="text" class="form-control" autocomplete="off" name="correo" placeholder="Ingresa tu correo" />
+                                <span class="input-group-btn">
+                                    <!--  <button class="btn btn-danger" type="button">Suscribete!</button> -->
+                                </span>
                             </div>
-                        </div><!--/.col-md-4-->
+                        </form>
+                    </div> <!--/.col-md-3-->
+                </div>
+            </div>
+        </section>
+
+        <h:outputScript>
+            $(document).ready(function (){
+                $('#btnmodalRecover').on("click",function(e){
+                    e.preventDefault();
+                    $('#modalRecoverForm').modal('show');
+                });
+                $('#btnmodalRegister').on("click",function(e){
+                    e.preventDefault();
+                    $('#modalRegisterForm').modal('show');
+                });
+                $('#btnmodalLogin').on("click",function(e){
+                    e.preventDefault();
+                    $('#modalLoginForm').modal('show');
+                });
+            });            
+        </h:outputScript>
+        
+          <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <h:form>
+                             <div class="md-form">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <p:inputText id="form2" class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
+                                     requiredMessage="Debe ingresar un email"
+                                     validatorMessage="Email Invalido">
+                                     <f:validateRegex pattern="^((\w){1,}(\.){0,1}){1,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                </p:inputText>
+                            </div>
+                            <div class="md-form">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <p:password id="txtpass" class="form-control" value="#{sesion.usuario.password}" required="true" placeholder="********"
+                                        requiredMessage="Debe ingresar una contraseña"
+                                        validatorMessage="Contraseña no cumple formato">
+                                        <f:validateRegex pattern="^[A-za-z0-9]{8,}$"/>   
+                                </p:password>
+                            </div>
+                            <div class="text-center">
+                                <p:messages closable="true" id="message" />
+                                <p:commandButton update="message" validateClient="true" value="Entrar" action="#{sesion.iniciarSesion}" class="btn btn-success"/>
+                            </div>
+                            <hr/>
+                        </h:form>
+                            <button id="btnmodalRecover" class="text-info btn btn-white border-0 p-0 shadow-none">Olvido su contraseña?</button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </div>
+        
+        
 
-            <section id="bottom" class="p-3" style="background: linear-gradient(to bottom, #010105, #000000);">    <div class="container">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="1well well-3sm"><a href="Historia.php"><font style="color:#FFFFFF;"><h4>Quienes somos</h4></font></a></div>
-                            <ul class="arrow">
-                                <li><a href="Historia.php">Historia de la empresa</a></li>
-                                <li><a href="Complejos.php">Complejos</a></li>
-                                <li><a href="Bolsa_trabajo.php">Bolsa de trabajo</a></li>
-                                <li><a href="Contactanos.php">Contáctanos</a></li>
-                            </ul>
-                        </div><!--/.col-md-3-->
-
-                        <div class="col-md-3 col-sm-6">
-                            <div class="1naranja2"><a href="Cartelera.php"><font style="color:#FFFFFF;"><h4>Cartelera</h4></font></a></div>
-                            <div>
-                                <ul class="arrow">
-                                    <li><a href="Nuestros_servicios.php">Nuestros Servicios</a></li>
-                                    <li><a href="Dulceria.php">Nuestros Productos</a></li>
-                                    <li><a href="Festival_cine.php">Festival de cine</a></li>
-                                    <li><a href="Rse.php">Responsabilidad Social Empresarial</a></li>
-                                    <!--    <li><a href="#">Proximos Estrenos</a></li>
-                                        <li><a href="Preventa.php">Preventa</a></li> -->
-                                </ul>
+        <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Registrarse</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <h:form>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <p:inputText class="form-control" value="#{sesion.usuario.nombre}" required="true" placeholder="Kevin Matthew Cruz Pablo" 
+                                             requiredMessage="Debe ingresar un nombre"
+                                             validatorMessage="Nombre ingresado no valido">
+                                    <f:validateRegex pattern="^[A-Za-z]{4,}(( ){0,1}[A-Za-z]{4,}){0,}$"/>
+                                </p:inputText>
                             </div>
-                        </div><!--/.col-md-3-->
+                            <div class="md-form mb-5">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                <p:inputText class="form-control" value="#{sesion.usuario.direccion}" required="true" placeholder="Soyapango, San Salvador" 
+                                             requiredMessage="Debe ingresar una direccion"
+                                             validatorMessage="Direccion ingresada no valido">
+                                    <f:validateRegex pattern="^[A-Za-z]{5,}(((\,( )|\,){0,1}[A-Za-z]{2,}|( ){0,1}){1,}){0,}$"/>
+                                </p:inputText>
+                            </div>
+                            <div class="md-form mb-5">
+                                <i class="fas fa-phone prefix grey-text"></i>
+                                <p:inputText  class="form-control" value="#{sesion.usuario.telefono}" required="true" placeholder="XXXX-XXXX" 
+                                              requiredMessage="Debe ingresar un numero"
+                                              validatorMessage="Numero ingresado no valido">
+                                    <f:validateRegex pattern="^[9|6|7][0-9]{7}$"/>
+                                </p:inputText>
+                            </div>
 
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <p:inputText  class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
+                                              requiredMessage="Debe ingresar un email"
+                                              validatorMessage="Email ingresado no es valido">
+                                    <f:validateRegex pattern="^((\w){1,}(\.){0,1}){1,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                </p:inputText>
+                            </div>
 
-                        <div class="col-md-3 col-sm-6">
-                            <h4><div class="Foot4ermenu2"><a href="Noticias.php"><font style="color:#FFFFFF;">Noticias</font></a></div></h4>
-                            <div>
-                                <div class="media"><div class="pull-left"><h:graphicImage library="images" name="4.jpg" width="62" height="32" style="border-radius: 7px;"/></div><div class="media-body"><span class="media-heading"><a href="Noticias_buscar.php?id=10">Así es como Visión podría salvar a todos en Vengadores: Endgame</a></span><small class="muted">Posteado 08-01-2019</small></div></div><div class="media"><div class="pull-left"><h:graphicImage library="images" name="frozen-2-imagenes.jpg" width="62" height="32" style="border-radius: 7px;"/></div><div class="media-body"><span class="media-heading"><a href="Noticias_buscar.php?id=12">“Frozen 2”, primer tráiler de la esperada secuela del mayor éxito de Disney</a></span><small class="muted">Posteado 19-03-2019</small></div></div>                </div>
-                        </div><!--/.col-md-3-->
+                            <div class="md-form mb-5">
+                                <i class="far fa-id-card prefix grey-text"></i>
+                                <p:inputText  class="form-control" value="#{sesion.usuario.dui}" required="true" placeholder="XXXXXXXX-X" 
+                                              requiredMessage="Debe ingresar un numero DUI"
+                                              validatorMessage="DUI ingresado no valido">
+                                    <f:validateRegex pattern="^[0-9]{8}-[0-9]$"/>
+                                </p:inputText>
+                            </div>
 
+                            <div class="md-form mb-5">
+                                <i class="fas fa-key prefix grey-text"></i>
+                                <p:password id="txtnewpass" class="form-control" value="#{sesion.usuario.password}" required="true" placeholder="********"
+                                            requiredMessage="Debe ingresar una contraseña"
+                                            validatorMessage="Longitud minima: 8 Caracteres">
+                                    <f:validateRegex pattern="^[A-za-z0-9]{8,}$"/>   
+                                </p:password>
+                            </div>
+                            <p:messages closable="true" id="messages" />
+                            <div class="modal-footer d-flex justify-content-center">
+                                <p:commandButton update="messages" validateClient="true" value="Registrarse" action="${sesion.registrarUusario}" style="margin-right:10px"/>
+                            </div>
 
-
-
-                        <div class="col-md-3 col-sm-6">
-                            <h4><div class="1well well4-sm"><a href="Politicas.php"><font style="color:#FFFFFF;">Términos y condiciones</font></a></div></h4>
-                            <address>
-                                <strong>Multicinema</strong><br/>
-                                    Bulevar Universitario<br/>
-                                        Col. Centro América<br/>
-                                            Santa Fé, San Salvador<br/>
-                                                <abbr title="Phone">Tel:</abbr> 2271 1079
-                                                </address>
-                                                <h4>Nuevas noticias</h4>
-                                                <form role="form" method="post" action="Guardar_correo.php">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" autocomplete="off" name="correo" placeholder="Ingresa tu correo" />
-                                                            <span class="input-group-btn">
-                                                                <!--  <button class="btn btn-danger" type="button">Suscribete!</button> -->
-                                                            </span>
-                                                    </div>
-                                                </form>
-                                                </div> <!--/.col-md-3-->
-                                                </div>
-                                                </div>
-                                                </section>
-            
-            
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </h:body>
     <h:outputScript library="js" name="bootstrap.js"></h:outputScript>
     <h:outputScript library="js" name="mdb.js"></h:outputScript>
