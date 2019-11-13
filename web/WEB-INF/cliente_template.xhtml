@@ -5,7 +5,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -46,12 +47,22 @@
                         <li class="nav-item">
                             <a class="nav-link" href="contactanos.xhtml">Contactanos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="btnmodalLogin" href="inicarsesion.xhtml">Iniciar Sesión</a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="btnmodalRegister" href="registrarse.xhtml" class="nav-link">Registrarse</a>
-                        </li>
+                        <c:if test="${sessionScope.Session != null}">
+                             <li>
+                                <a class="nav-link" href="asdasd">Alejandro</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${sessionScope.Session == null}">
+                            <li class="nav-item">
+                                <a class="nav-link" id="btnmodalLogin" href="inicarsesion.xhtml">Iniciar Sesión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="btnmodalRegister" href="registrarse.xhtml" class="nav-link">Registrarse</a>
+                            </li>
+                        </c:if>
+                        
+                       
+                    
                     </ul>
                 </div>
             </div>
@@ -164,6 +175,7 @@
             $(document).ready(function (){
                 $('#btnmodalRecover').on("click",function(e){
                     e.preventDefault();
+                    $('#modalLoginForm').modal('hide');
                     $('#modalRecoverForm').modal('show');
                 });
                 $('#btnmodalRegister').on("click",function(e){
@@ -216,6 +228,36 @@
             </div>
         </div>
         
+         <!-- Modal para recuperar contraseña -->
+        <div class="modal fade" id="modalRecoverForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+              <h:form>
+                <div class="modal-header text-center">
+                  <h4 class="modal-title w-100 font-weight-bold">Recuperar contraseña</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body mx-3">
+                  <div class="md-form mb-5">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                      <p:inputText id="form2" class="form-control" value="#{sesion.usuario.correo}" required="true" placeholder="alguien@example.com" 
+                                     requiredMessage="Debe ingresar un email valido para recuperar su contraseña"
+                                     validatorMessage="Email ingresado no es valido">
+                                     <f:validateRegex pattern="^((\w){1,}(\.){0,1}){1,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                      </p:inputText>
+                  </div>
+                  <p class="grey-text">Se te enviara tu nueva contraseña por Email</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <h:commandButton class="btn btn-success" action="#{sesion.recuperarContrasenia}" value="Recuperar" ></h:commandButton>
+                </div>
+                </h:form>
+              </div>
+            </div>
+          </div>
+        <!-- Modal para recuperar contraseña-->
         
 
         <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

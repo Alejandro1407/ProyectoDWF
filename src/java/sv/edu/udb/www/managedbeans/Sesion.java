@@ -133,16 +133,16 @@ public class Sesion implements Serializable{
         externalContext.getSessionMap().put("Session", usuario);
         switch (usuario.getTipo().getTipo()){
             case "Administrador":
-                externalContext.redirect("Administrador/index.xhtml");
+                externalContext.redirect("/ProyectoDWF/Administrador/index.xhtml");
                 break;
             case "Encargado":
-                externalContext.redirect("Encargado/index.xhtml");
+                externalContext.redirect("/ProyectoDWF/Encargado/index.xhtml");
                 break;
             case "Dependiente":
-                externalContext.redirect("Dependiente/index.xhtml");
+                externalContext.redirect("/ProyectoDWF/Dependiente/index.xhtml");
                 break;
             case "Cliente":
-                externalContext.redirect("Cliente/index.xhtml");
+                externalContext.redirect("/ProyectoDWF/Cliente/index.xhtml");
             } 
          }catch(Exception e){
              JSFUtil.addErrorMessage("¡Error! No se pudo redirigir");
