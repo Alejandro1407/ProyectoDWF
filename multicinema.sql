@@ -195,3 +195,11 @@ for each row
     end//
 delimiter ;
 
+select * from funcion where 
+'2019-02-02' != (select horario from funcion where horaInicio = '14:00' and sala = 1 limit 1) OR
+1 != (select sala from funcion where horaInicio = '14:00' and horario = '2019-02-02' limit 1) OR
+'14:00' not between (select horaInicio from funcion where horario = '2019-02-02' and sala = 1 limit 1) AND
+(select horaFin from funcion where horario = '2019-02-02' and sala = 1 limit 1) and
+(select horaInicio + interval (select duracion from pelicula where id = 5) minute) not between
+(select horaInicio from funcion where horario = '2019-02-02' and sala = 1 limit 1) AND
+(select horaFin from funcion where horario = '2019-02-02' and sala = 1 limit 1);
