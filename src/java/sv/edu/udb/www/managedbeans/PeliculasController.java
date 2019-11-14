@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -61,9 +62,9 @@ public class PeliculasController implements Serializable {
     private List<String> idiomas;
     private List<String> actores;
     private List<String> directores;
-    /**
-     * Creates a new instance of Peliculas
-     */
+    
+    Date date = new Date();
+     
     public PeliculasController() {
     }
     @PostConstruct
@@ -135,7 +136,7 @@ public class PeliculasController implements Serializable {
         actores.forEach((a) -> {
             al.add(produccionFacade.find(Integer.parseInt(a)));
         });
-        pelicula.setDirectoresList(al);
+        pelicula.setActoresList(al);
         peliculaFacade.create(getPelicula());
         return "index";
     }
@@ -208,7 +209,7 @@ public class PeliculasController implements Serializable {
             al.add(produccionFacade.find(Integer.parseInt(a)));
         });
         if(!al.isEmpty()){
-        pelicula.setDirectoresList(al);
+        pelicula.setActoresList(al);
         }
         peliculaFacade.edit(getPelicula());
         return "index";
@@ -226,6 +227,10 @@ public class PeliculasController implements Serializable {
      */
     public void setPelicula(Pelicula pelicula) {
         this.pelicula = pelicula;
+    }
+
+     public Date getCurrentDate() {
+        return date;
     }
 
     /**

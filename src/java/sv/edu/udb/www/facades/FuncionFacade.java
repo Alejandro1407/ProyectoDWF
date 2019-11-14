@@ -5,6 +5,7 @@
  */
 package sv.edu.udb.www.facades;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,6 +31,20 @@ public class FuncionFacade extends AbstractFacade<Funcion> {
         return em;
     }
 
+    public List<Funcion> ObtenerFunciones(Date fecha){
+     try{
+            EntityManager em =  JPAUtil.getEntityManager();
+            Query query = em.createNamedQuery("Funcion.findByHorario").setParameter("horario",fecha); 
+            try{
+               List<Funcion> funciones = query.getResultList();
+               return funciones;
+            }catch(Exception e){
+                return null;
+            }
+         }catch(Exception e){
+             return null;
+         }
+    }
     public FuncionFacade() {
         super(Funcion.class);
     }

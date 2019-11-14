@@ -163,6 +163,8 @@ INSERT INTO `usuario` ( `nombre`, `correo`, `password`, `telefono`, `tipo`, `dir
 ('Alejandro Alejo', 'alejandroalejo714@gmail.com', SHA2('Password',256), '2222-2222', '1', 'Apopa', '12345678-9', NULL), 
 ('Kevin Coreas', 'kevincor13@gmail.com', SHA2('Password',256), '1234-5678', '1', 'Soyapango', '12345678-0', NULL);
 
+INSERT INTO oficio VALUES (NULL,"Director"),
+                          (NULL,"Actor");
 
 INSERT INTO `clasificacion` (`id`, `clasificacion`) VALUES (NULL, 'TP'), (NULL, 'M-12'), (NULL, 'M-15'), (NULL, 'M-18');
 

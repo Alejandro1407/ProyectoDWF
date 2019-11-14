@@ -109,10 +109,9 @@
                 <h:outputLabel for="imagen" value="Imagen:"/>
                  <h:inputFile id="imagen" styleClass="form-control" value="#{peliculasController.fileUpload}"/>
                 <h:outputLabel for="estreno" value="Fecha de estreno:"/>
-                <p:datePicker id="button" value="#{peliculasController.pelicula.estreno}" showIcon="true"
+                <p:datePicker id="button" value="#{peliculasController.pelicula.estreno}" showIcon="true" mindate="${peliculasController.currentDate}"
                               required="true"
                               requiredMessage="Debe ingresar fecha de estreno">
-                    <f:convertDateTime pattern="MM-dd-yy"/>
                 </p:datePicker>
             </h:panelGrid>
             <h:commandButton value="Guardar" styleClass="btn btn-success"

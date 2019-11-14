@@ -83,6 +83,7 @@ public class FuncionController implements Serializable{
     private int idioma;
     private int pelicula;
     private int sala;
+    private Pelicula peliculaobj;
     /**
      * Creates a new instance of FuncionController
      */
@@ -104,7 +105,7 @@ public class FuncionController implements Serializable{
     
     public List<Funcion> obtenerFunciones(){
         try{
-            List<Funcion> funciones = funcionFacade.findAll();
+            List<Funcion> funciones = funcionFacade.ObtenerFunciones(date);
             return funciones;
         } catch(Exception e){
             return null;
@@ -117,6 +118,13 @@ public class FuncionController implements Serializable{
     
     public String obtenerFecha(){
         return dateFormat.format(date);
+    }
+    
+    public String obtenerFechaD(){
+        String dayNames[] = new DateFormatSymbols().getWeekdays();
+        String monthNames[] = new DateFormatSymbols().getMonths();
+        Calendar calendar = Calendar.getInstance();
+        return (String.format("%s %s de %s de %s",dayNames[calendar.get(Calendar.DAY_OF_WEEK)],calendar.get(Calendar.DAY_OF_MONTH),monthNames[calendar.get(Calendar.MONTH)],calendar.get(Calendar.YEAR)));
     }
     
     public String minhour(){
