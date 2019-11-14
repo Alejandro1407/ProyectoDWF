@@ -171,3 +171,27 @@ INSERT INTO `clasificacion` (`id`, `clasificacion`) VALUES (NULL, 'TP'), (NULL, 
 INSERT INTO `genero` (`id`, `genero`) VALUES (NULL, 'Accion'), (NULL, 'Terror'), (NULL, 'Comedia'), (NULL, 'Romance'), (NULL, 'Drama'), (NULL, 'Suspenso'), (NULL, 'Ciencia ficcion'), (NULL, 'Fantasia'), (NULL, 'Musical');
 
 INSERT INTO `idioma` (`id`, `idioma`) VALUES (NULL, 'Ingles'), (NULL, 'Español');
+
+
+/*APARTIR DE AQUI MIERDA*/
+
+
+use multicinema;
+
+alter table funcion
+drop primary key;
+
+alter table funcion
+add id int primary key auto_increment;
+
+delimiter //
+create trigger generarCodigo before insert on funcion
+for each row
+	begin
+        set @pelicula = (select titulo from pelicula where id = new.pelicula);
+        set @codigo = substring(@pelicula, 1, 3);
+        set @codigo = concat(@codigo, new.id);
+        set new.codigo = @codigo;
+    end//
+delimiter ;
+
