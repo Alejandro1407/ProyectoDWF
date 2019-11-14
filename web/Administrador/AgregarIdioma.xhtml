@@ -58,7 +58,7 @@
                         <p:inputText class="form-control" value="#{idiomasController.idioma.idioma}" required="true" placeholder="Español, Ingles, Portuges" 
                                          requiredMessage="Debe ingresar un nombre"
                                          validatorMessage="Nombre invalido">
-                                         <f:validateRegex pattern="^[A-Za-z-]{4,}$"/>
+                                         <f:validateRegex pattern="^[ñA-Za-z]{4,}(( ){0,1}[A-Za-z]{4,}){0,}$"/>
                         </p:inputText>
                     </div>	
                     <p:messages closable="true" />

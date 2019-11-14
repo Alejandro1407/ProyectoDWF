@@ -31,10 +31,7 @@
             </h:form>
             
         </div>
-        
     </ui:define>
-    
-    
     
     <ui:define name="content">
         <!-- Inicio de la Programación toxica-->
@@ -53,32 +50,37 @@
                             </p:inputText>
                         
                             <p:outputLabel for="pelicula" value="Pelicula:"/>
-                            <p:selectOneMenu id="pelicula" value="#{funcionController.pelicula}">
+                            <p:selectOneMenu id="pelicula" value="#{funcionController.pelicula}" required="true" requiredMessage="Debe seleccionar una pelicula">
                                 <f:selectItems value="#{funcionController.obtenerPeliculas()}" var="pelicula" itemLabel="#{pelicula.titulo}" itemValue="#{pelicula.id}"></f:selectItems>
                             </p:selectOneMenu>
                         
                             <p:outputLabel value="Sala:" for="sala"/>
-                            <p:selectOneMenu id="sala" value="#{funcionController.sala}">
+                            <p:selectOneMenu id="sala" value="#{funcionController.sala}" required="true" requiredMessage="Debe seleccionar una sala">
                                 <f:selectItems value="#{funcionController.obtenerSalas()}" var="sala" itemValue="#{sala.id}" itemLabel="Sala #{sala.id}"></f:selectItems>
                             </p:selectOneMenu>
                         
                             <p:outputLabel for="idioma" value="Idioma:"/>
-                            <p:selectOneMenu id="idioma" value="#{funcionController.idioma}">
+                            <p:selectOneMenu id="idioma" value="#{funcionController.idioma}" required="true" requiredMessage="Debe seleccionar un idioma">
                                 <f:selectItems value="#{funcionController.obtenerIdiomas()}" var="idioma" itemValue="#{idioma.id}" itemLabel="#{idioma.idioma}"></f:selectItems>
                             </p:selectOneMenu>
                         
-                            <p:outputLabel for="horario" value="Horario:" />
-                            <p:datePicker id="horario" value="#{funcionController.funcion.horario}" showIcon="true"
+                            <p:outputLabel for="fecha" value="Fecha:" />
+                            <p:datePicker id="fecha" value="#{funcionController.funcion.horario}" showIcon="true"  mindate="${funcionController.currentDate}"
                                     required="true"
                                     requiredMessage="Debe ingresar un horario">
                             </p:datePicker>
-                </h:panelGrid>        	
+                            <p:outputLabel for="funcion3d" value="Función 3D:" />
+                            <p:selectBooleanCheckbox id="funcion3d"  value="#{funcionController.funcion.funcion3d}"  />
+                            
+                            <p:outputLabel for="hora" value="Hora:" />
+                            <p:calendar id="hora" value="#{funcionController.funcion.horaInicio}" pattern="HH:mm"  showOn="button" timeOnly="true" required="true" requiredMessage="Debe Selecciona una hora" />      
+                    </h:panelGrid>        	
                 <p:messages closable="true" />
-                <h:commandButton value="Aceptar" action="#{funcionController.insertarFuncion()}" class="btn btn-success"  />
+                <h:commandButton value="Aceptar" action="#{funcionController.insertarFuncion()}" class="btn btn-success"   />
                 </h:form>
             </div>
         </div>
         
-        <!-- Fin Programación toxica-->
+        <!-- Fin Programación toxica minHour="${funcionController.minhour()}" minMinute="${funcionController.minminute()}"-->
     </ui:define>
 </ui:composition>

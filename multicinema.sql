@@ -83,10 +83,12 @@ asiento int not null
 create table funcion(
 codigo varchar(12)  primary key,
 pelicula int not null,
-horario datetime not null,
+horario date not null,
 sala int not null,
 idioma int not null,
-funcion3d tinyint default 0
+funcion3d boolean default 0,
+horaInicio TIME not null,
+horaFin TIME null
 );
 
 create table entrada(
@@ -142,14 +144,13 @@ ALTER TABLE idiomaPelicula ADD PRIMARY KEY ( pelicula , idioma );
 ALTER TABLE generoPelicula ADD PRIMARY KEY ( pelicula , genero );
 
 delimiter //
-    create procedure loguearse(correo varchar(150),password varchar(50))
-    begin
-        SELECT u.*, t.*
-        FROM usuario u
-        INNER JOIN tipo t
-        ON u.tipo = t.id
-        WHERE (u.correo = correo AND u.password = password); 
-end //
+create trigger calcularHoraF before insert on funcion
+for each row
+	begin
+		set @minutos = (select duracion from pelicula where id = new.pelicula);
+        set @horaFinal = (new.horaInicio + interval @minutos minute);
+        set new.horaFin = @horaFinal;
+    end//
 delimiter ;
 
 INSERT INTO `tipo` (`id`, `tipo`) VALUES 

@@ -39,10 +39,6 @@ import sv.edu.udb.www.facades.IdiomaFacade;
 import sv.edu.udb.www.facades.ProduccionFacade;
 
 
-/**
- *
- * @author kevin
- */
 @ManagedBean
 @ViewScoped
 public class PeliculasController implements Serializable {
@@ -143,12 +139,7 @@ public class PeliculasController implements Serializable {
         peliculaFacade.create(getPelicula());
         return "index";
     }
-    /**
-     * Método que permite eliminar pelicula
-     *
-     * @param id
-     * 
-     */
+
     public void eliminarPelicula(int id){
         
         peliculaFacade.remove(peliculaFacade.find(id));

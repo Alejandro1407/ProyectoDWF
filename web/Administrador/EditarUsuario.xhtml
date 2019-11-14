@@ -64,17 +64,17 @@
                         <p:inputText id="form2" class="form-control" value="#{usuariosController.usuario.nombre}" required="true" placeholder="Nombre" 
                                      requiredMessage="Debe ingresar un email"
                                      validatorMessage="Email Invalido">
-                                     <f:validateRegex pattern="^[A-Za-z]{4,}\s{0,1}$"/>
+                                     <f:validateRegex pattern="^[ñA-Za-z]{4,}(( ){0,1}[ñA-Za-z]{4,}){0,}$"/>
                         </p:inputText> 
                          <p:inputText  class="form-control" value="#{usuariosController.usuario.telefono}" required="true" placeholder="XXXX-XXXX" 
                                      requiredMessage="Debe ingresar un numero"
                                      validatorMessage="Numero ingresado no valido">
-                                     <f:validateRegex pattern="^[9|6|7][0-9]{7}$"/>
+                                     <f:validateRegex pattern="^[2|9|6|7][0-9]{7}$"/>
                       </p:inputText>
                         <p:inputText class="form-control" value="#{usuariosController.usuario.direccion}" required="true" placeholder="Soyapango, San Salvador" 
                                      requiredMessage="Debe ingresar una direccion"
                                      validatorMessage="Direccion ingresada no valido">
-                                     <f:validateRegex pattern="^[A-Za-z]{5,}$"/>
+                                     <f:validateRegex pattern="^[ñA-Za-z]{5,}(((\,( )|\,){0,1}[ñA-Za-z]{2,}|( ){0,1}){1,}){0,}$"/>
                       </p:inputText>
                       <p:inputText  class="form-control" value="#{usuariosController.usuario.dui}" required="true" placeholder="XXXXXXXX-X" 
                                      requiredMessage="Debe ingresar un numero DUI"
@@ -84,7 +84,7 @@
                         <p:inputText  class="form-control" value="#{usuariosController.usuario.correo}" required="true" placeholder="alguien@example.com" 
                                      requiredMessage="Debe ingresar un email"
                                      validatorMessage="Email Invalido">
-                                     <f:validateRegex pattern="^\w{5,}@\w{3,}((\.)[A-Za-z]{2,3}){1,}$"/>
+                                     <f:validateRegex pattern="^((\w|ñ){1,}(\.){0,1}){1,}@(\w|ñ){3,}((\.)[ñA-Za-z]{2,3}){1,}"/>
                         </p:inputText>
                         <h:selectOneMenu id="tipo" value="#{usuariosController.tipo.id}" style="width:125px">
                             <f:selectItems value="#{usuariosController.obtenerTipos()}"
@@ -94,8 +94,7 @@
                     <h:commandButton value="Aceptar" action="#{usuariosController.editarUsuario()}" class="btn btn-success"  />
                 </h:form>
                         </div>
-                    </div>	
-                  
+                    </div>	      
                 </div>
         </div>
             

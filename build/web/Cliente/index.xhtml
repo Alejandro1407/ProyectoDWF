@@ -8,8 +8,41 @@
     <ui:define name="title">Multicinema-Index</ui:define>
     
     <ui:define name="content">
-        <!-- Inicio de la Programación toxica-->
         
+        <!-- Inicio de la Programación toxica-->
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                     <h:graphicImage library="images" name="TERMINATOR DESTINO OCULTO (SLIDER PAG. WEB).jpg" />
+                </div>
+                <div class="carousel-item">
+                    <h:graphicImage library="images" name="MALEFICA 2 (SLIDER 2 PAG. WEB) (2).jpg" />
+                </div>
+                <div class="carousel-item">
+                     <h:graphicImage library="images" name="LOS LOCOS ADDAMS (SLIDER PAG. WEB).jpg" />
+                </div>
+                 <div class="carousel-item">
+                     <h:graphicImage library="images" name="Slider Inicio Nueva Pagina web 2019 milagros.jpg" />
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <style>
+            .carousel-control-prev-icon{
+                background-image: #{resource['images/svg/arrow_left.svg']} !important;
+            }
+            .carousel-control-next-icon{
+                background-image: #{resource['images/svg/arrow_right.svg']} !important;
+            }
+            
+        </style>
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>

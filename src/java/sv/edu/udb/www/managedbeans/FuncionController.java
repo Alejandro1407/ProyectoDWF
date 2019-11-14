@@ -5,19 +5,20 @@
  */
 package sv.edu.udb.www.managedbeans;
 
-import static com.sun.xml.bind.util.CalendarConv.formatter;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
@@ -31,54 +32,37 @@ import sv.edu.udb.www.facades.PeliculaFacade;
 import sv.edu.udb.www.facades.SalaFacade;
 import sv.edu.udb.www.util.JPAUtil;
 import sv.edu.udb.www.util.JSFUtil;
+import java.util.concurrent.TimeUnit;
+import sv.edu.udb.www.entities.Fecha;
 
-/**
- *
- * @author denny
- */
 @Named(value = "funcionController")
 @ManagedBean
 @javax.faces.bean.ViewScoped
 public class FuncionController implements Serializable{
 
-    /**
-     * @return the idioma
-     */
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date date = new Date();
+    
     public int getIdioma() {
         return idioma;
     }
 
-    /**
-     * @param idioma the idioma to set
-     */
     public void setIdioma(int idioma) {
         this.idioma = idioma;
     }
 
-    /**
-     * @return the pelicula
-     */
     public int getPelicula() {
         return pelicula;
     }
 
-    /**
-     * @param pelicula the pelicula to set
-     */
     public void setPelicula(int pelicula) {
         this.pelicula = pelicula;
     }
 
-    /**
-     * @return the sala
-     */
     public int getSala() {
         return sala;
     }
 
-    /**
-     * @param sala the sala to set
-     */
     public void setSala(int sala) {
         this.sala = sala;
     }
@@ -94,6 +78,7 @@ public class FuncionController implements Serializable{
     
     @EJB
     private final FuncionFacade funcionFacade = new FuncionFacade();
+    
     private Funcion funcion;
     private int idioma;
     private int pelicula;
@@ -119,25 +104,62 @@ public class FuncionController implements Serializable{
     
     public List<Funcion> obtenerFunciones(){
         try{
-            return funcionFacade.findAll();
+            List<Funcion> funciones = funcionFacade.findAll();
+            return funciones;
         } catch(Exception e){
             return null;
         }
     }
     
-    public void insertarFuncion() throws ParseException{
+    public Date getCurrentDate() {
+        return date;
+    }
+    
+    public String obtenerFecha(){
+        return dateFormat.format(date);
+    }
+    
+    public String minhour(){
+        DateFormat minhourformat =  new SimpleDateFormat("HH");
+        return minhourformat.format(date);
+    }
+    
+    public String minminute(){
+        DateFormat minminuteformat =  new SimpleDateFormat("mm");
+        return minminuteformat.format(date);
+    }
+    
+    public List<Fecha> obtenerFechas(){
+        List<Fecha> fechas =  new ArrayList<>();
+        String dayNames[] = new DateFormatSymbols().getWeekdays();
+        String monthNames[] = new DateFormatSymbols().getMonths();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH,-1);
+        for(int i = 0;i < 8;i++){
+            calendar.add(Calendar.DAY_OF_MONTH,1); 
+            Fecha fecha =  new Fecha();
+            fecha.setDisplayDate(String.format("%s %s de %s de %s",dayNames[calendar.get(Calendar.DAY_OF_WEEK)],calendar.get(Calendar.DAY_OF_MONTH),monthNames[calendar.get(Calendar.MONTH)],calendar.get(Calendar.YEAR)));
+            fecha.setDate(dateFormat.format(date).substring(0,8).concat(String.valueOf(Integer.parseInt(dateFormat.format(date).substring(8,10)) + i)));
+            fechas.add(fecha);
+        } 
+        return fechas;
+    }
+ 
+    
+    public String insertarFuncion() throws ParseException{
         Idioma id = idiomaFacade.find(this.idioma);
         this.funcion.setIdioma(id);
         Pelicula pl = peliculaFacade.find(this.pelicula);
         this.funcion.setPelicula(pl);
         Sala sl = salaFacade.find(this.sala);
         this.funcion.setSala(sl);
-        
         try{
             funcionFacade.create(funcion);
             JSFUtil.addSucessMessage("Se agrego la funcion correctamente");
+            return "funciones";
         }catch(Exception e){
             JSFUtil.addErrorMessage("No fue posible agregar la funcion :(");
+            return "AgregarFuncion";
         }
     }
     
@@ -193,7 +215,7 @@ public class FuncionController implements Serializable{
         return idiomaList;
     }
     
-    public void editarFuncion(){
+    public String editarFuncion(){
         Idioma id = idiomaFacade.find(this.idioma);
         this.funcion.setIdioma(id);
         Pelicula pl = peliculaFacade.find(this.pelicula);
@@ -204,8 +226,10 @@ public class FuncionController implements Serializable{
         try{
             funcionFacade.edit(funcion);
             JSFUtil.addSucessMessage("Se modifico la funcion correctamente");
+            return "funciones";
         }catch(Exception e){
             JSFUtil.addErrorMessage("No fue posible modificar la funcion :(");
+            return "editarFuncion";
         }
     }
     

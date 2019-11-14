@@ -10,29 +10,108 @@
     
     <ui:define name="content">
         <!-- Inicio de Programacion toxica-->
-        <main class="pt-5 mx-lg-5">
-            <div class="container-fluid mt-3 ">
-                 <h2 class="grey-text text-center w-100">Cartelera</h2><br/>
-                 <div class="row pl-5 pr-5 d-flex justify-content-center">
-                     
-                   <c:forEach items="#{peliculasController.obtenerPeliculas()}" var="pelicula">
-                    <div class="card col-3 mr-2">
-                        <img class="card-img-top p-2 pt-3" width="400" height="300" src="data:image/png;base64,#{peliculasController.displayImagen(pelicula.imagen)}" alt="Card image cap" />
-                        <div class="card-body">
-                            <h4 class="card-title"><a>#{pelicula.titulo} (#{pelicula.duracion}min)</a></h4>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Sinopsis: #{pelicula.sinopsis}</span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Subtitulada: ${pelicula.subtitulada == 1 ? "Sí" : "No"}</span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Clasificacion: #{pelicula.clasificacion.clasificacion}</span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Generos: <c:forEach items="#{pelicula.generoList}" var="genero"> #{genero.genero} </c:forEach></span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Idiomas: <c:forEach items="#{pelicula.idiomaList}" var="idioma"> #{idioma.idioma}</c:forEach></span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Estreno: #{pelicula.estreno.date}/#{pelicula.estreno.month}/#{pelicula.estreno.year}</span> </p>
+        <style type="text/css">
+        .nav-tabs>li {
+            float: left;
+            margin-bottom: -1px;
+        }
+        .nav>li {
+            position: relative;
+            display: block;
+        }
+        </style>
+        <div class="d-flex justify-content-center">
+            <form id="frmCartelera" action="" method="get" >
+                <br/><br/>
+                <div class="row">
+                    <center>
+                        <font face="arial">
+                            <span style="color: #0105FF;"><font size="4">Día: </font></span>
+                        </font>
+                        <select name="date" class="selectpicker" data-style="btn-info" style="margin-right:90px">
+                            <c:forEach items="${funcionController.obtenerFechas()}" var="fecha">
+                                <c:if test="${param.date == fecha.date}">
+                                    <option value="${fecha.date}" selected="selected" > ${fecha.displayDate}</option>
+                                </c:if> 
+                                 <c:if test="${param.date != fecha.date}">
+                                     <option value="${fecha.date}" > ${fecha.displayDate}</option>
+                                </c:if> 
+                               
+                            </c:forEach>
+                        </select>
+                        <input type="submit" class="btn btn-success" value="Consulta"/>
+                    </center>
+                </div>
+                <hr/>
+            </form>
+        </div>    
+        
+        <div class="panel-heading"><h3 class="panel-title"></h3><h3><center>Cartelera para el dia 13 Noviembre 2019</center></h3></div>
+        <div class="panel-body">         
+            <section class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="peliculas/poster-malefica.png" class="zoom" height="142" width="102" style="border-radius:13px;-webkit-box-shadow: -1px 3px 13px 1px rgba(0,0,0,0.75);
+                    -moz-box-shadow: -1px 3px 13px 1px rgba(0,0,0,0.75);
+                    box-shadow: -1px 3px 13px 1px rgba(0,0,0,0.75);"/>
+                    </div>
+                    <div class="col-md-9">
+                        <div id="content">
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs" style="    padding-left: 0;margin-bottom: 0;list-style: none;border-bottom: 1px solid #ddd;">
+                                <li class="p-2 border"><a href="#horarios82739" data-toggle="tab">Horarios</a></li>
+                                <li class="p-2 border"><a href="#sinopsis82739" data-toggle="tab">Sinopsis</a></li>
+                            </ul>
+                            <div id="my-tab-content" class="tab-content">
+                                <div class="tab-pane active" id="horarios82739"><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#fe682e;">Complejo: Multicinema Plaza Mundo</font><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Título: </font><span class="media-heading">MALEFICA 2 (DUEÑA DEL MAL)</span><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Clasificación: </font><span class="media-heading">Mayores de 12 años y menores acompañados de</span><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Promoción: </font><span class="media-heading">No</span><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Duración: </font><span class="media-heading">1h 58min</span><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;"><br/>Español 2D<br/></font>
+                                    <button type="button" class="btn btn-info" style="margin:1px">10:00 AM</button>
+                                    <button type="button" class="btn btn-info" style="margin:1px">12:30 PM</button>
+                                    <button type="button" class="btn btn-info" style="margin:1px">03:00 PM</button>
+                                    <button type="button" class="btn btn-info" style="margin:1px">05:30 PM</button>
+                                    <button type="button" class="btn btn-info" style="margin:1px">08:00 PM</button>
+                                </div>
+                                <div class="tab-pane" id="sinopsis82739">Maléfica: maestra del mal" es una aventura de fantasía que se desarrolla varios años después de "Maléfica". En esa película el público conoció por fin los acontecimientos que endurecieron el corazón de la villana más famosa de Disney y que la llevaron a maldecir a la recién nacida Princesa Aurora</div>
+                            </div>
                         </div>
                     </div>
-                   </c:forEach>   
-                </div>     
+                          
+                </div>
+            </section>
+            <hr/>
+        </div>
+        <div class="container d-flex justify-content-center">
+            <div class="col-md-9 col-xs-9">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="alert alert-success"><center>Precios  para el complejo Multicinema Plaza Mundo validos para el día Miercoles 13  Noviembre  2019</center></h3>
+                    </div>
+                    <table class="table table-hover" id="task-table">
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Entrada General (Formato 2D)</td>
+                                <td>$ 2.50</td>
+                            </tr>
+                            <tr>
+                                <td>Entrada General (Formato 3D)</td>
+                                <td>$ 3.75</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </main>
-        <!-- Card -->     
+        </div>
+        
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>

@@ -36,9 +36,9 @@ public class SessionFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        //chain.doFilter(request, response);
-        //return;
-        
+        chain.doFilter(request, response);
+        return;
+        /*
         HttpServletRequest peticion = (HttpServletRequest) request;
         HttpServletResponse respuesta = (HttpServletResponse) response;
         HttpSession session = peticion.getSession(false);
@@ -81,10 +81,8 @@ public class SessionFilter implements Filter {
                 //JSFUtil.addErrorMessage("Debe iniciar sesion");
                 respuesta.sendRedirect(loginURI);
             }else{ chain.doFilter(request, response); return;}
-            
-
         }
-        
+        */
     }
 
     public FilterConfig getFilterConfig() {

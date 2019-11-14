@@ -34,12 +34,14 @@ public class ClasificacionController implements Serializable{
         this.clasificacion = clasificacion;
     }
 
-    public void insertarClasificacion(){
+    public String insertarClasificacion(){
      try{
             clasificacionFacade.create(clasificacion);
             JSFUtil.addSucessMessage("¡Exito! Clasificación Insertado correctamente");
+            return "clasificacion";
         }catch(Exception e){
             JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+            return "AgregarClasificacion";
         }
     }
     public List<Clasificacion> obtenerClasificaciones(){
@@ -65,9 +67,6 @@ public class ClasificacionController implements Serializable{
         }
         
     }
-    
-    
-    
     
     public ClasificacionController() {
     }

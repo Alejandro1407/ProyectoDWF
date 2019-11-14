@@ -42,12 +42,14 @@ public class GenerosController implements Serializable {
         }
     }
     
-    public void insertarGenero(){
+    public String insertarGenero(){
         try{
             generosFacade.create(genero);
             JSFUtil.addSucessMessage("¡Exito! Genero Insertado correctamente");
+            return "funciones";
         }catch(Exception e){
             JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+            return "AgregarGenero";
         }
     }
     

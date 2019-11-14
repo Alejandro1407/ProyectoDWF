@@ -73,7 +73,7 @@ public class UsuariosController implements Serializable{
             return null;
         }
     }
-    public void insertarUsuario(){
+    public String insertarUsuario(){
      try{
             Boolean ExitsDUI = usuarioFacade.ValidateExitsDUI(usuario.getDui());
             Boolean ExitsEmail = usuarioFacade.ValidateExitsEmail(usuario.getCorreo());
@@ -82,20 +82,21 @@ public class UsuariosController implements Serializable{
             }
             if(ExitsDUI){
                 JSFUtil.addErrorMessage("¡Error! Numero DUI ya registrado");
-                return;
+                return "AgregarUsuario";
             }
             if(ExitsEmail){
                 JSFUtil.addErrorMessage("¡Error! Correo electronico ya registrado");
-                return;
-            }
-            
+                return "AgregarUsuario";
+            }         
             usuario.setEnabled(true);
             usuario.setTipo(tipo);
             usuario.setPassword(JSFUtil.HashPassword(usuario.getPassword()));
             usuarioFacade.create(usuario);
             JSFUtil.addSucessMessage("¡Exito! usuario Insertado correctamente");
+            return "usuarios";
         }catch(Exception e){
             JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+            return "AgregarUsuario";
         }
     }
     public void eliminarUsuario(){
@@ -110,16 +111,16 @@ public class UsuariosController implements Serializable{
             JSFUtil.addErrorMessage("¡Error! No se pudo elimianr");
         }
     }
-     public void editarUsuario(){
+     public String editarUsuario(){
         try{
             usuario.setTipo(tipo); 
             usuario.setEnabled(true);
             usuarioFacade.edit(usuario);
             JSFUtil.addSucessMessage("¡Exito! Actualizado correctamente");
-            return;
+            return "usuarios";
         }catch(Exception e){
             JSFUtil.addErrorMessage("¡Error! No pudo actualizarse");
-            return;
+            return "EditarUsuario";
         }
     }
     public void loadUsuario(){

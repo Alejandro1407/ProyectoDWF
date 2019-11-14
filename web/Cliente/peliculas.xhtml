@@ -9,29 +9,33 @@
     <ui:define name="title">Multicinema-Index</ui:define>
     
     <ui:define name="content">
+        <link rel="stylesheet" href="#{resource['css/peliculas.css']}"/>
         <!-- Inicio de Programacion toxica-->
-        <main class="pt-5 mx-lg-5">
-            <div class="container-fluid mt-3 ">
-                 <h2 class="grey-text text-center w-100">Peliculas</h2><br/>
-                 <div class="row pl-5 pr-5 d-flex justify-content-center">
-                   <c:forEach items="#{peliculasController.obtenerPeliculas()}" var="pelicula">
-                    <div class="card col-3 mr-2">
-                        <img class="card-img-top p-2 pt-3" width="400" height="300" src="data:image/png;base64,#{peliculasController.displayImagen(pelicula.imagen)}" alt="Card image cap" />
-                        <div class="card-body">
-                            <h4 class="card-title"><a>#{pelicula.titulo} (#{pelicula.duracion}min)</a></h4>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Sinopsis: #{pelicula.sinopsis}</span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Subtitulada: ${pelicula.subtitulada == 1 ? "Sí" : "No"}</span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Clasificacion: #{pelicula.clasificacion.clasificacion}</span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Generos: <c:forEach items="#{pelicula.generoList}" var="genero"> #{genero.genero} </c:forEach></span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Idiomas: <c:forEach items="#{pelicula.idiomaList}" var="idioma"> #{idioma.idioma}</c:forEach></span> </p>
-                            <p class="card-text"><span class="text-dark" style="font-size: 16px;">Estreno: #{pelicula.estreno.date}/#{pelicula.estreno.month}/#{pelicula.estreno.year}</span> </p>
-                        </div>
-                    </div>
-                   </c:forEach>   
-                </div>     
+        <section id="title" style="background: linear-gradient(to bottom, #000000, #000000);background:url(#{resource['images/Peliculas.jpg']}) repeat 0;-webkit-box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);-moz-box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);
+                box-shadow: 1px 4px 13px -3px rgba(0,0,0,0.75);">     <div class="container">
+                <div class="row">
+                    <div class="col-sm-10">
+                        <h1 class="hit-the-floor1" style="color:#AB2567">Peliculas</h1><div style="color:#AB2567;font: oblique bold 120% cursive;">Disfruta de nuestras Películas</div>             </div>
+                </div>
             </div>
-        </main>
-        <!-- Card -->     
+        </section>
+        <section id="contenedor" class="pt-5">
+            <h2 class="grey-text text-center w-100">Peliculas</h2><br/>
+            <div class="row">
+                 <ul id="portafolio" style="width: 100%;max-width: 1024px;height: auto;text-align: center;">
+
+                 <c:forEach items="#{peliculasController.obtenerPeliculas()}" var="pelicula">  
+                    <li class="item Cartelera mix_all" style="display: inline-block;  opacity: 1;">
+                        <a href="#" class="html5lightbox1" data-group="galeria" title="#{pelicula.titulo})">
+                            <img src="data:image/png;base64,#{peliculasController.displayImagen(pelicula.imagen)}" width="204" height="282" />
+                        </a>
+                    </li>
+                 </c:forEach>   
+
+                 </ul>
+            </div>
+        </section>
+          
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>

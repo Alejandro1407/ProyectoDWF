@@ -45,9 +45,9 @@ public class Funcion implements Serializable {
     private String codigo;
     @Basic(optional = false)
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date horario;
-    private Short funcion3d;
+    private boolean funcion3d;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcion")
     private List<Entrada> entradaList;
     @JoinColumn(name = "sala", referencedColumnName = "id")
@@ -59,10 +59,32 @@ public class Funcion implements Serializable {
     @JoinColumn(name = "idioma", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Idioma idioma;
+    @Basic(optional = false)
+    @NotNull
+    @Temporal(TemporalType.TIME)
+    private Date horaInicio;
+    @Basic(optional = false)
+    @Temporal(TemporalType.TIME)
+    private Date horaFin;
 
     public Funcion() {
     }
+   public Date getHoraInicio() {
+        return horaInicio;
+    }
 
+    public void setHoraInicio(Date horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Date getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(Date horaFin) {
+        this.horaFin = horaFin;
+    }
+    
     public Funcion(String codigo) {
         this.codigo = codigo;
     }
@@ -88,11 +110,11 @@ public class Funcion implements Serializable {
         this.horario = horario;
     }
 
-    public Short getFuncion3d() {
+    public boolean getFuncion3d() {
         return funcion3d;
     }
 
-    public void setFuncion3d(Short funcion3d) {
+    public void setFuncion3d(boolean funcion3d) {
         this.funcion3d = funcion3d;
     }
 

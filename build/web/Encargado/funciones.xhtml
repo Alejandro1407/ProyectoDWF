@@ -3,7 +3,8 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="title">Multicinema-Administrador</ui:define>
     
@@ -43,9 +44,8 @@
         <p:messages closable="true"/>
 	<br/>
         <h3 class="grey-text text-center w-500">Funciones</h3><br/>
-        <div class="d-flex justify-content-center">
-            
-            <h:dataTable value="#{funcionController.obtenerFunciones()}" var="funcion" class="table table-responsive w-responsive table-bordered table-striped h-100">
+       
+            <h:dataTable value="#{funcionController.obtenerFunciones()}" var="funcion" class="table table-responsive w-100 table-bordered table-striped h-100">
                 <h:column>
                     <f:facet name="header">Codigo</f:facet>
                     #{funcion.codigo}
@@ -63,16 +63,27 @@
                     #{funcion.idioma.idioma}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Horario</f:facet>
+                    <f:facet name="header">Fecha</f:facet>
                     <h:outputText value="#{funcion.horario}">
                         <f:convertDateTime pattern="yyyy/MM/dd"/>
                     </h:outputText>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">3D</f:facet>
-                    #{funcion.funcion3d}
+                    <f:facet name="header">Hora Inicio</f:facet>
+                    <h:outputText value="#{funcion.horaInicio}">
+                        <f:convertDateTime type="time" pattern="hh:mm" timeZone="America/El_Salvador"/>
+                    </h:outputText>
                 </h:column>
-                
+                <h:column>
+                    <f:facet name="header">Hora Final</f:facet>
+                    <h:outputText value="#{funcion.horaFin}">
+                        <f:convertDateTime type="time" pattern="hh:mm" timeZone="America/El_Salvador"/> 
+                    </h:outputText> 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">3D</f:facet>
+                    <h:outputText value="#{funcion.funcion3d ? 'Sí':'No'}"/>
+                </h:column>    
                 <h:column>
                     <f:facet name="header">Acciones</f:facet>
                     <h:form>
@@ -86,7 +97,7 @@
                 </h:column>
                 
             </h:dataTable>
-        </div>
+        
         <h:outputScript>
             function confirmarEliminacion(){
                 return confirm("¿Está seguro que desea eliminar esta función");

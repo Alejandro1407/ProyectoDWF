@@ -69,14 +69,16 @@ public class ProduccionController implements Serializable{
         }
         
     }
-    public void insertarDirector(){
+    public String insertarDirector(){
      try{
             produccion.setId(1);
             produccion.setOficio(new Oficio(1,"Director"));
             produccionFacade.create(produccion);
             JSFUtil.addSucessMessage("¡Exito! Director Insertado correctamente");
+            return "directores";
         }catch(Exception e){
             JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+            return "AgregarDirector";
         }
     }
         public void eliminarActor(){
@@ -91,14 +93,16 @@ public class ProduccionController implements Serializable{
         }
         
     }
-    public void insertarActor(){
+    public String insertarActor(){
      try{
             produccion.setId(1);
             produccion.setOficio(new Oficio(2,"Actor"));
             produccionFacade.create(produccion);
             JSFUtil.addSucessMessage("¡Exito! Actor Insertado correctamente");
+            return "actores";
         }catch(Exception e){
             JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+            return "AgregarActor";
         }
     }
     
