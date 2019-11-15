@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Funcion.findAll", query = "SELECT f FROM Funcion f")
     , @NamedQuery(name = "Funcion.findByCodigo", query = "SELECT f FROM Funcion f WHERE f.codigo = :codigo")
-    , @NamedQuery(name = "Funcion.findTimes", query = "SELECT  f.codigo,f.idioma.idioma,f.funcion3d,f.horaInicio,f.horaFin FROM Funcion f WHERE f.pelicula.id = :id AND f.horario = :fecha")
+    , @NamedQuery(name = "Funcion.findTimes", query = "SELECT  f.id,f.idioma.idioma,f.funcion3d,f.horaInicio,f.horaFin FROM Funcion f WHERE f.pelicula.id = :id AND f.horario = :fecha")
     , @NamedQuery(name = "Funcion.findByHorario", query = "SELECT f.pelicula FROM Funcion f WHERE f.horario = :horario GROUP BY f.pelicula")
     , @NamedQuery(name = "Funcion.findByFuncion3d", query = "SELECT f FROM Funcion f WHERE f.funcion3d = :funcion3d")})
 public class Funcion implements Serializable {

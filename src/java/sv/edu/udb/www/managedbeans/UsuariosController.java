@@ -115,14 +115,15 @@ public class UsuariosController implements Serializable{
             Boolean ExitsEmail = usuarioFacade.ValidateExitsEmail(usuario.getCorreo());
             if(ExitsDUI == null || ExitsEmail == null){
                 JSFUtil.addErrorMessage("!Error¡ Datos no pudieron ser validados");
+                return "AgregarDependiente";
             }
             if(ExitsDUI){
                 JSFUtil.addErrorMessage("¡Error! Numero DUI ya registrado");
-                return "AgregarUsuario";
+                return "AgregarDependiente";
             }
             if(ExitsEmail){
                 JSFUtil.addErrorMessage("¡Error! Correo electronico ya registrado");
-                return "AgregarUsuario";
+                return "AgregarDependiente";
             }         
             usuario.setEnabled(true);
             usuario.setTipo(new Tipo(4, "Dependiente"));
