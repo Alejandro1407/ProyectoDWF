@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +21,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -33,15 +37,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Funcion.findAll", query = "SELECT f FROM Funcion f")
     , @NamedQuery(name = "Funcion.findByCodigo", query = "SELECT f FROM Funcion f WHERE f.codigo = :codigo")
-    , @NamedQuery(name = "Funcion.findByHorario", query = "SELECT f FROM Funcion f WHERE f.horario = :horario")
+    , @NamedQuery(name = "Funcion.findTimes", query = "SELECT  f.codigo,f.idioma.idioma,f.funcion3d,f.horaInicio,f.horaFin FROM Funcion f WHERE f.pelicula.id = :id AND f.horario = :fecha")
+    , @NamedQuery(name = "Funcion.findByHorario", query = "SELECT f.pelicula FROM Funcion f WHERE f.horario = :horario GROUP BY f.pelicula")
     , @NamedQuery(name = "Funcion.findByFuncion3d", query = "SELECT f FROM Funcion f WHERE f.funcion3d = :funcion3d")})
 public class Funcion implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 12)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Null
     private String codigo;
     @Basic(optional = false)
     @NotNull
@@ -66,6 +72,8 @@ public class Funcion implements Serializable {
     @Basic(optional = false)
     @Temporal(TemporalType.TIME)
     private Date horaFin;
+    
+
 
     public Funcion() {
     }
@@ -174,6 +182,20 @@ public class Funcion implements Serializable {
     @Override
     public String toString() {
         return "sv.edu.udb.entities.Funcion[ codigo=" + codigo + " ]";
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

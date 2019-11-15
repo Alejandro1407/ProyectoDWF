@@ -151,7 +151,8 @@ public class Sesion implements Serializable{
     
     public void cerrarSesion(){
         this.setUsuario(null);
-        HttpSession session = (HttpSession) externalContext.getSession(false);
+        externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        session = (HttpSession) externalContext.getSession(false);
         session.invalidate();
         try{
             externalContext.redirect("index.xhtml");

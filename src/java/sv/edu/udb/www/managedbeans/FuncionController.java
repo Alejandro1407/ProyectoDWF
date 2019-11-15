@@ -5,6 +5,7 @@
  */
 package sv.edu.udb.www.managedbeans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -33,7 +34,9 @@ import sv.edu.udb.www.facades.SalaFacade;
 import sv.edu.udb.www.util.JPAUtil;
 import sv.edu.udb.www.util.JSFUtil;
 import java.util.concurrent.TimeUnit;
+import org.apache.commons.codec.binary.Base64;
 import sv.edu.udb.www.entities.Fecha;
+import sv.edu.udb.www.entities.Horarios;
 
 @Named(value = "funcionController")
 @ManagedBean
@@ -103,13 +106,39 @@ public class FuncionController implements Serializable{
         return funcion;
     }
     
-    public List<Funcion> obtenerFunciones(){
+    public String displayImagen(byte[] data) throws IOException {
+
+        String imageString = new String(Base64.encodeBase64(data));
+        return imageString;
+    }
+    
+    public List<Pelicula> obtenerCartelera(){
+         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+         Date fecha = new Date();
+         String textDate =  request.getParameter("date");
+         if(textDate != null){
+             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+             try{
+                fecha  = format.parse(textDate);
+             }catch(Exception e){
+                 return null;
+             }
+         }
         try{
-            List<Funcion> funciones = funcionFacade.ObtenerFunciones(date);
-            return funciones;
+            List<Pelicula> funciones = new ArrayList<>();
+            List<Pelicula> temp = funcionFacade.ObtenerFunciones(fecha);
+            for(Pelicula x: temp){
+                x.setHorarios(funcionFacade.ObtenerHorarios(x.getId(),fecha));
+                funciones.add(x);
+            }
+            return funciones;  
         } catch(Exception e){
             return null;
         }
+    }
+    
+    public List<Funcion> obtenerFunciones(){
+        return funcionFacade.findAll();
     }
     
     public Date getCurrentDate() {
@@ -147,7 +176,7 @@ public class FuncionController implements Serializable{
             calendar.add(Calendar.DAY_OF_MONTH,1); 
             Fecha fecha =  new Fecha();
             fecha.setDisplayDate(String.format("%s %s de %s de %s",dayNames[calendar.get(Calendar.DAY_OF_WEEK)],calendar.get(Calendar.DAY_OF_MONTH),monthNames[calendar.get(Calendar.MONTH)],calendar.get(Calendar.YEAR)));
-            fecha.setDate(dateFormat.format(date).substring(0,8).concat(String.valueOf(Integer.parseInt(dateFormat.format(date).substring(8,10)) + i)));
+            fecha.setDate(dateFormat.format(date).substring(0,8).concat(String.valueOf(Integer.parseInt(dateFormat.format(date).substring(8,10)) + i)) );
             fechas.add(fecha);
         } 
         return fechas;

@@ -43,12 +43,6 @@
                 <h:form>
                     <h3 class="grey-text text-center">Agregar Funcion</h3>
                     <h:panelGrid columns="2" styleClass="table" cellpadding="5" columnClasses="label, value">
-                       
-                            <p:outputLabel for="codigo" value="Codigo:" />
-                            <p:inputText id="codigo" class="form-control" value="#{funcionController.funcion.codigo}" required="true" placeholder="DPL503-1" 
-                                             requiredMessage="Debe ingresar un codigo para la funcion">
-                            </p:inputText>
-                        
                             <p:outputLabel for="pelicula" value="Pelicula:"/>
                             <p:selectOneMenu id="pelicula" value="#{funcionController.pelicula}" required="true" requiredMessage="Debe seleccionar una pelicula">
                                 <f:selectItems value="#{funcionController.obtenerPeliculas()}" var="pelicula" itemLabel="#{pelicula.titulo}" itemValue="#{pelicula.id}"></f:selectItems>

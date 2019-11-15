@@ -65,7 +65,7 @@ pelicula int not null,
 genero int not null
 );
 create table sala(
-id int primary key,
+id int primary key auto_increment,
 descripcion varchar(100) null
 );
 
@@ -81,7 +81,8 @@ asiento int not null
 );
 
 create table funcion(
-codigo varchar(12)  primary key,
+id int primary key auto_increment,
+codigo varchar(12) unique ,
 pelicula int not null,
 horario date not null,
 sala int not null,
@@ -92,7 +93,8 @@ horaFin TIME null
 );
 
 create table entrada(
-codigo varchar(15) primary key,
+id int primary key auto_increment,
+codigo varchar(15) unique,
 usuario int not null,
 funcion varchar(12) not null,
 asiento int not null
@@ -172,17 +174,6 @@ INSERT INTO `genero` (`id`, `genero`) VALUES (NULL, 'Accion'), (NULL, 'Terror'),
 
 INSERT INTO `idioma` (`id`, `idioma`) VALUES (NULL, 'Ingles'), (NULL, 'Español');
 
-
-/*APARTIR DE AQUI MIERDA*/
-
-
-use multicinema;
-
-alter table funcion
-drop primary key;
-
-alter table funcion
-add id int primary key auto_increment;
 
 delimiter //
 create trigger generarCodigo before insert on funcion

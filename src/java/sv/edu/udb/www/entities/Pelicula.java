@@ -24,15 +24,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author alejo
- */
 @Entity
 @XmlRootElement
 @NamedQueries({
@@ -96,7 +93,18 @@ public class Pelicula implements Serializable {
         @JoinColumn(name = "idioma", referencedColumnName = "id")})
     @ManyToMany
     private List<Idioma> idiomaList;
+    
+    @Transient
+    private List<Horarios> horarios;
 
+    public List<Horarios> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horarios> horarios) {
+        this.horarios = horarios;
+    }
+    
     public Pelicula() {
     }
 

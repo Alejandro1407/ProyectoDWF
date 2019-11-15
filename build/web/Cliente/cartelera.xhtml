@@ -46,48 +46,50 @@
             </form>
         </div>    
         
-        <div class="panel-heading"><h3 class="panel-title"></h3><h3><center>Cartelera para el dia ${funcionController.obtenerFechaD()}</center></h3></div>
+        <div class="panel-heading"><h3 class="panel-title"></h3><h3><center>Cartelera</center></h3></div>
         <c:if test="${empty  funcionController.obtenerFunciones()}">
             <p class="alert alert-danger w-50 ml-auto mr-auto d-block mt-3">No hay funciones disponibles</p>
         </c:if>
-        <c:forEach items="${funcionController.obtenerFunciones()}"></c:forEach>
+        <c:forEach items="${funcionController.obtenerCartelera()}" var="pelicula">
         <div class="panel-body">         
             <section class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <img src="peliculas/poster-malefica.png" class="zoom" height="142" width="102" style="border-radius:13px;-webkit-box-shadow: -1px 3px 13px 1px rgba(0,0,0,0.75);
+                        <img src="data:image/png;base64,#{funcionController.displayImagen(pelicula.imagen)}" class="zoom" height="142" width="102" style="border-radius:13px;-webkit-box-shadow: -1px 3px 13px 1px rgba(0,0,0,0.75);
                     -moz-box-shadow: -1px 3px 13px 1px rgba(0,0,0,0.75);
                     box-shadow: -1px 3px 13px 1px rgba(0,0,0,0.75);"/>
                     </div>
                     <div class="col-md-9">
                         <div id="content">
-                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs" style="    padding-left: 0;margin-bottom: 0;list-style: none;border-bottom: 1px solid #ddd;">
-                                <li class="p-2 border"><a href="#horarios82739" data-toggle="tab">Horarios</a></li>
-                                <li class="p-2 border"><a href="#sinopsis82739" data-toggle="tab">Sinopsis</a></li>
+                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs" style="padding-left: 0;margin-bottom: 0;list-style: none;border-bottom: 1px solid #ddd;">
+                                <li class="p-2 border"><a href="#horarios${pelicula.id}" data-toggle="tab">Horarios</a></li>
+                                <li class="p-2 border"><a href="#sinopsis${pelicula.id}" data-toggle="tab">Sinopsis</a></li>
                             </ul>
                             <div id="my-tab-content" class="tab-content">
-                                <div class="tab-pane active" id="horarios82739"><br/>
+                                <div class="tab-pane active" id="horarios${pelicula.id}"><br/>
                                     <font color="Olive" face="Comic Sans MS,arial" style="color:#fe682e;">Complejo: Multicinema Plaza Mundo</font><br/>
-                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Título: </font><span class="media-heading">MALEFICA 2 (DUEÑA DEL MAL)</span><br/>
-                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Clasificación: </font><span class="media-heading">Mayores de 12 años y menores acompañados de</span><br/>
-                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Promoción: </font><span class="media-heading">No</span><br/>
-                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Duración: </font><span class="media-heading">1h 58min</span><br/>
-                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;"><br/>Español 2D<br/></font>
-                                    <button type="button" class="btn btn-info" style="margin:1px">10:00 AM</button>
-                                    <button type="button" class="btn btn-info" style="margin:1px">12:30 PM</button>
-                                    <button type="button" class="btn btn-info" style="margin:1px">03:00 PM</button>
-                                    <button type="button" class="btn btn-info" style="margin:1px">05:30 PM</button>
-                                    <button type="button" class="btn btn-info" style="margin:1px">08:00 PM</button>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Título: </font><span class="media-heading">${pelicula.titulo}</span><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Clasificación: </font><span class="media-heading">${pelicula.clasificacion.clasificacion}</span><br/>
+                                    <font color="Olive" face="Comic Sans MS,arial" style="color:#2E64FE;">Duración: </font><span class="media-heading">${pelicula.duracion}min</span><br/>
+                                    
+                                    <c:forEach items="${pelicula.horarios}" var="h">
+                                        <button id="${h.codigo}" class="btn btn-info btnComprar" value="" style="margin:1px">${h.idioma} <h:outputText value="#{h.funcion3d ? '3D ':'2D '}" /> 
+                                            <h:outputText value="#{h.horaInicio}">
+                                                <f:convertDateTime type="time" pattern="hh:mm" timeZone="America/El_Salvador"/> 
+                                            </h:outputText> 
+                                        </button>
+                                    </c:forEach>
+                                    
                                 </div>
-                                <div class="tab-pane" id="sinopsis82739">Maléfica: maestra del mal" es una aventura de fantasía que se desarrolla varios años después de "Maléfica". En esa película el público conoció por fin los acontecimientos que endurecieron el corazón de la villana más famosa de Disney y que la llevaron a maldecir a la recién nacida Princesa Aurora</div>
+                                <div class="tab-pane" id="sinopsis${pelicula.id}">${pelicula.sinopsis}</div>
                             </div>
                         </div>
-                    </div>
-                          
+                    </div>       
                 </div>
             </section>
             <hr/>
         </div>
+        </c:forEach>
         <div class="container d-flex justify-content-center">
             <div class="col-md-9 col-xs-9">
                 <div class="panel panel-success">
@@ -115,6 +117,16 @@
                 </div>
             </div>
         </div>
+         <h:outputScript>
+            $(document).ready(function(){
+                $('.btnComprar').on('click',function(e){
+                    if(confirm("¿Comprar entradas para esta funcio?")){
+                        location.href = "/ProyectoDWF/Cliente/comprar.xhtml?cod=" + e.target.id;
+                    }
+                });
+            
+            });
+         </h:outputScript>
         
         <!-- Fin Programación toxica-->
     </ui:define>
