@@ -37,6 +37,9 @@ public class IdiomaFacade extends AbstractFacade<Idioma> {
             EntityManager em =  JPAUtil.getEntityManager();
             Query query = em.createNativeQuery("SELECT * FROM idiomapelicula WHERE idioma = ?").setParameter(1,id);
             List<Object[]> result = query.getResultList();
+            if(result.isEmpty()){
+                return true;
+            }
             return false;
         }catch(Exception e){
             return true;

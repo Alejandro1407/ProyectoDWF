@@ -58,9 +58,9 @@
                             </p:selectOneMenu>
                         
                             <p:outputLabel for="fecha" value="Fecha:" />
-                            <p:datePicker id="fecha" value="#{funcionController.funcion.horario}" showIcon="true"  mindate="${funcionController.currentDate}"
+                            <p:datePicker id="fecha" value="#{funcionController.funcion.horario}" showIcon="true"  mindate="${funcionController.currentDate}"  
                                     required="true"
-                                    requiredMessage="Debe ingresar un horario">
+                                    requiredMessage="Debe seleccionar una fecha">
                             </p:datePicker>
                             <p:outputLabel for="funcion3d" value="Función 3D:" />
                             <p:selectBooleanCheckbox id="funcion3d"  value="#{funcionController.funcion.funcion3d}"  />

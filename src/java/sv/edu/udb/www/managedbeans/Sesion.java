@@ -101,7 +101,7 @@ public class Sesion implements Serializable{
             token.setEnabled(true);
             String Message = "Hola\nBienvenido a Multicinema SV\n"
                             + "\nPara validar su correo entre al siguiente link"
-                            + "\nhttp://localhost:21058/ProyectoDWF/index.xhtml?Email=" + token.getEmail() + "&Token=" + token.getToken()
+                            + "\nhttp://localhost:23333/ProyectoDWF/login.xhtml?Email=" + token.getEmail() + "&Token=" + token.getToken()
                             + "\n\nSi no hiciste dicha solicitud ignora este mensaje"
                             + "\n\nDepartamento de Administración - Multicinema SV";
 
@@ -137,6 +137,9 @@ public class Sesion implements Serializable{
           JSFUtil.addInfoMessage("Email ya confirmado");
           return;
         } 
+        Usuario u =  usuarioFacade.FindByCorreo(Email);
+        u.setEnabled(true);
+        usuarioFacade.edit(u);
         t.setEnabled(false);
         tokenFacade.edit(t);
         JSFUtil.addSucessMessage("Email Confirmado");

@@ -142,7 +142,17 @@ public class FuncionController implements Serializable{
     }
     
     public Date getCurrentDate() {
-        return date;
+        Calendar calendar = Calendar.getInstance();
+        String textdate = String.format("%s-%s-%s",calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.YEAR) );
+        Date data;
+        try{
+           data = new SimpleDateFormat("MM-dd-yyyy").parse(textdate);
+        }catch(Exception e){
+            return null;
+        }    
+        calendar.add(Calendar.DATE,-1); 
+        return  calendar.getTime();
+        //return date;
     }
     
     public String obtenerFecha(){
@@ -210,7 +220,6 @@ public class FuncionController implements Serializable{
     public void eliminarFuncion(){
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String id = request.getParameter("id");
-        
         try{
             funcionFacade.remove(obtenerFuncion(id));
             JSFUtil.addSucessMessage("Funcion eliminada correctamente");
@@ -224,15 +233,12 @@ public class FuncionController implements Serializable{
             EntityManager em = JPAUtil.getEntityManager();
             Query qr = em.createNamedQuery("Funcion.findByCodigo");
             qr.setParameter("codigo", Codigo);
-            JSFUtil.addSucessMessage("Si se encontro xd");
             try{
                 return (Funcion) qr.getSingleResult();
             } catch (Exception e){
-                JSFUtil.addSucessMessage("No se pudo convertir xd" + e.toString());
                 return new Funcion();
             }
         } catch(Exception e){
-            JSFUtil.addSucessMessage("No se encontro");
             return null;
         }
     }

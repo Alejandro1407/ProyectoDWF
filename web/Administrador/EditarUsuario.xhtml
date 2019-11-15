@@ -16,7 +16,7 @@
             <a href="Peliculas/index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-video mr-3">Peliculas</i>
             </a>
-            <a href="usuarios.xhtml" class="list-group-item list-group-item-action waves-effect">
+            <a href="usuarios.xhtml" class="list-group-item active waves-effect">
                 <i class="fas fa-users mr-4"> Usuarios</i>
             </a>
             <a href="idiomas.xhtml" class="list-group-item list-group-item-action waves-effect">
@@ -25,7 +25,7 @@
             <a href="generos.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-tag mr-3">Generos</i>
             </a>
-            <a href="clasificacion.xhtml" class="list-group-item active waves-effect">
+            <a href="clasificacion.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-film mr-3">Clasificación</i>
             </a>
              <a href="actores.xhtml" class="list-group-item list-group-item-action waves-effect">
@@ -54,7 +54,7 @@
             
             <div class="shadow-none w-50 p-6 ">        
                
-                    <h3 class="grey-text text-center">Agregar Usuario</h3>
+                    <h3 class="grey-text text-center">Editar Usuario</h3>
                     <div class="md-form">
                         <div class="form-group mx-sm-2 mb-2">
                       <h:form>
@@ -84,7 +84,7 @@
                                      validatorMessage="Email Invalido">
                                      <f:validateRegex pattern="^((\w|ñ){1,}(\.){0,1}){1,}@(\w|ñ){3,}((\.)[ñA-Za-z]{2,3}){1,}"/>
                         </p:inputText>
-                        <h:selectOneMenu id="tipo" value="#{usuariosController.tipo.id}" style="width:125px">
+                          <h:selectOneMenu id="tipo" value="#{usuariosController.tipo.id}" styleClass="form-control" style="width:125px">
                             <f:selectItems value="#{usuariosController.obtenerTipos()}"
                                               var="t" itemLabel="#{t.tipo}" itemValue="#{t.id}"/>
                        </h:selectOneMenu>  

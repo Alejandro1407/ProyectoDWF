@@ -58,7 +58,7 @@
                         <p:inputText class="form-control" value="#{produccionController.produccion.nombre}" required="true" placeholder="Nombre" 
                                          requiredMessage="Debe ingresar un nombre"
                                          validatorMessage="Nombre invalido">
-                                         <f:validateRegex pattern="^[ñA-Za-z]{4,}(( ){0,1}[A-Za-z]{4,}){0,}$"/>
+                                         <f:validateRegex pattern="^[ñA-Za-z]{3,}(( ){0,1}[A-Za-z]{2,}){0,}$"/>
                         </p:inputText>
                     </div>	
                     <p:messages closable="true" />

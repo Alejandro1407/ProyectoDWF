@@ -56,12 +56,29 @@ public class EntradaController {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         int id;
         try{ 
-            id= Integer.parseInt(request.getParameter("id"));
+            id=Integer.parseInt(request.getParameter("id"));
         }
         catch(Exception e){
-            return ;
+            return;
         }
-        this.setEntrada(entradaFacade.find(id));
+        Funcion f =  funcionFacade.find(id);
+        List<Entrada> entradas = f.getEntradaList();
+        Entrada temp = entradaFacade.find(1);
+        this.setEntrada(temp);
+    }
+    
+    public List<Entrada> obtenerEntradas(){
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        int id;
+        try{ 
+            id=Integer.parseInt(request.getParameter("id"));
+        }
+        catch(Exception e){
+            return null;
+        }
+        Funcion f =  funcionFacade.find(id);
+        List<Entrada> entradas = f.getEntradaList();
+        return entradas;
     }
 
     public int contarAsientosDisponibles(Integer id) {

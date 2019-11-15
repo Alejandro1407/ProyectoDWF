@@ -86,9 +86,7 @@
                 <h:column>
                     <f:facet name="header">Acciones</f:facet>
                     <h:form>
-                        <h:commandButton class="btn btn-warning" action="editarFuncion.xhtml" value="Editar">
-                            <f:param name="id" value="#{funcion.codigo}"/>
-                        </h:commandButton>
+                       
                         <h:commandButton action="#{funcionController.eliminarFuncion()}" class="btn btn-danger" onclick="return confirmarEliminacion();" value="Eliminar">
                             <f:param name="id" value="#{funcion.codigo}" />
                         </h:commandButton>

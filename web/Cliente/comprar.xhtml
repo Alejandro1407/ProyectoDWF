@@ -10,8 +10,18 @@
     
     <ui:define name="content">
         <!-- Inicio de Programacion toxica-->
-        <p class="alert alert-success mt-5 w-50 ml-auto mr-auto d-block">${entradaController.entrada.funcion.id}</p>
+        ${entradaController.loadEntrada()}
+        <p class="alert alert-success mt-5 w-50 ml-auto mr-auto d-block">#{entradaController.entrada}</p>
 
+        
+        <c:forEach items="#{entradaController.obtenerEntradas()}" var="entrada">
+            #{entrada.id}
+            #{entrada.codigo}
+            #{entrada.usuario.nombre}
+            #{entrada.funcion.id}
+            #{entrada.asiento.id}
+        </c:forEach>
+        
         <div class="d-flex justify-content-center">
             
             <br/>
