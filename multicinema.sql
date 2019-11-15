@@ -145,16 +145,6 @@ ALTER TABLE reparto ADD PRIMARY KEY ( pelicula , actor );
 ALTER TABLE idiomaPelicula ADD PRIMARY KEY ( pelicula , idioma );
 ALTER TABLE generoPelicula ADD PRIMARY KEY ( pelicula , genero );
 
-delimiter //
-create trigger calcularHoraF before insert on funcion
-for each row
-	begin
-		set @minutos = (select duracion from pelicula where id = new.pelicula);
-        set @horaFinal = (new.horaInicio + interval @minutos minute);
-        set new.horaFin = @horaFinal;
-    end//
-delimiter ;
-
 INSERT INTO `tipo` (`id`, `tipo`) VALUES 
 ('1', 'Administrador'), 
 ('2', 'Cliente'),
@@ -174,14 +164,24 @@ INSERT INTO `genero` (`id`, `genero`) VALUES (NULL, 'Accion'), (NULL, 'Terror'),
 
 INSERT INTO `idioma` (`id`, `idioma`) VALUES (NULL, 'Ingles'), (NULL, 'Español');
 
-
 delimiter //
-create trigger generarCodigo before insert on funcion
+create trigger insertarFuncion before insert on funcion
 for each row
 	begin
-        set @pelicula = (select titulo from pelicula where id = new.pelicula);
+		set @minutos = (select duracion from pelicula where id = new.pelicula);
+        set @horaFinal = (new.horaInicio + interval @minutos minute);
+        
+		set @pelicula = (select titulo from pelicula where id = new.pelicula);
+        set @pelicula = replace(@pelicula, ' ', '');
+        set @pelicula = upper(@pelicula);
         set @codigo = substring(@pelicula, 1, 3);
-        set @codigo = concat(@codigo, new.id);
+        set @incremento = (select `AUTO_INCREMENT`
+			FROM  INFORMATION_SCHEMA.TABLES
+			WHERE TABLE_SCHEMA = 'multicinema'
+			AND   TABLE_NAME   = 'funcion');
+
+        set @codigo = concat(@codigo, @incremento);
+        set new.horaFin = @horaFinal;
         set new.codigo = @codigo;
     end//
 delimiter ;
