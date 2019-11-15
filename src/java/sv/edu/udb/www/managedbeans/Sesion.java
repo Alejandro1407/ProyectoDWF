@@ -47,6 +47,36 @@ public class Sesion implements Serializable{
         this.usuario = Sesion;
     }
     
+    public String registrarTarjeta(){
+        if(usuarioFacade.RegistrarTarjeta(usuario.getTarjeta(),usuario.getId())){
+            JSFUtil.addSucessMessage("Tarjeta registrada exitosamente");
+            return "tarjetas";
+        }else{
+            JSFUtil.addSucessMessage("¡Error! tarjeta no pudo ser registrada");
+            return "AgregarTarjeta";
+        }
+    }
+    
+    public String actualizarTarjeta(){
+        if(usuarioFacade.RegistrarTarjeta(usuario.getTarjeta(),usuario.getId())){
+            JSFUtil.addSucessMessage("Tarjeta actualizada");
+            return "tarjetas";
+        }else{
+            JSFUtil.addSucessMessage("¡Error! tarjeta no pudo ser actualizada");
+            return "EditarTarjeta";
+        }
+    }
+    
+    public void eliminarTarjeta(){
+        if(usuarioFacade.RegistrarTarjeta(null,usuario.getId())){
+            JSFUtil.addSucessMessage("Tarjeta eliminada");
+            return;
+        }else{
+            JSFUtil.addSucessMessage("¡Error! tarjeta no pudo ser eliminada");
+            return;
+        }
+    }
+    
     public void registrarUusario(){
     
         try{

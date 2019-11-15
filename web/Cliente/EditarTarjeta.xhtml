@@ -1,0 +1,35 @@
+<ui:composition template="/WEB-INF/cliente_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title">Multicinema-Index</ui:define>
+    
+    <ui:define name="content">
+        <!-- Inicio de la Programación toxica-->
+        ${sesion.validateSession()}
+        <a href="tarjetas.xhtml" class="btn btn-success ml-5 mt-5">Volver</a>
+        <div class="d-flex justify-content-center">
+            <div class="shadow-none w-50 p-5 ">        
+                <h:form>
+                    <h3 class="grey-text text-center">Editar Tarjeta</h3>
+                    <div class="md-form">
+                        <label>N° Tarjeta:</label><br/><br/>
+                        <p:inputText class="form-control" value="#{sesion.usuario.tarjeta}" required="true" placeholder="XXXXXXXXXXXXXXXX" 
+                                         requiredMessage="Debe ingresar un numero de tarjeta"
+                                         validatorMessage="Numero de tarjeta invalido">
+                                         <f:validateRegex pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$"/>
+                        </p:inputText>
+                    </div>	
+                    <p:messages closable="true" />
+                    <h:commandButton value="Aceptar" action="#{sesion.actualizarTarjeta()}" class="btn btn-success"  />
+                </h:form>
+            </div>
+        </div>
+      
+        <!-- Fin Programación toxica-->
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,64 @@
+<ui:composition template="/WEB-INF/cliente_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title">Multicinema-Index</ui:define>
+    
+    <ui:define name="content">
+        <!-- Inicio de la Programación toxica-->
+        ${sesion.validateSession()}
+        <div class="container">
+            <c:if test="${sesion.usuario.tarjeta eq null}">
+                <a href="AgregarTarjeta.xhtml" class="btn btn-success ml-5 mt-5">Agregar</a>
+            </c:if>
+            <c:if test="${sesion.usuario.tarjeta != null}">
+                <a href="#" class="btn btn-success disabled ml-5 mt-5">Agregar</a>
+            </c:if>
+            <p:messages closable="true"/>
+            <br/>
+            <h3 class="grey-text text-center w-100">Tarjetas</h3><br/>
+
+            <div class="containter d-flex justify-content-center"> 
+
+                <table class="table table-bordered w-50 ml-auto mr-auto d-block table-responsive">
+                    <tr>
+                        <th>Tarjeta</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                    <tr>
+
+                        <c:if test="${sesion.usuario.tarjeta eq null}">
+                            <td colspan="2"> <p class="alert alert-danger">No hay ninguna tarjeta registrada</p></td>
+                        </c:if>
+                        <c:if test="${sesion.usuario.tarjeta != null}">
+                            <td>  ${sesion.usuario.tarjeta}</td>
+                        </c:if>
+
+                        <c:if test="${sesion.usuario.tarjeta != null}">
+
+                            <td colspan="2">
+                                <h:form>
+                                    <h:commandButton action="EditarTarjeta.xhtml" class="btn btn-warning" value="Editar" />  
+                                    <h:commandButton action="#{sesion.eliminarTarjeta()}" class="btn btn-danger" onclick="return confirmarEliminacion();" value="Eliminar">
+                                        <f:param name="id" value="#{idioma.id}" />
+                                    </h:commandButton>
+                                </h:form>
+                            </td>
+                        </c:if>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+        <h:outputScript>
+            function confirmarEliminacion(){
+                return confirm("¿Está seguro que desea eliminar esta Tarjeta");
+            }
+         </h:outputScript>
+        <!-- Fin Programación toxica-->
+    </ui:define>
+</ui:composition>

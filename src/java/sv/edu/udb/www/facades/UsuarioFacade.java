@@ -90,6 +90,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         }
     }
     
+    public boolean RegistrarTarjeta(String tarjeta,int id){
+        try{
+            EntityManager em =  JPAUtil.getEntityManager();
+            Query query = em.createNativeQuery("UPDATE usuario SET tarjeta = ? WHERE id = ?").setParameter(1,tarjeta).
+                                                                                                        setParameter(2,id);
+            query.executeUpdate();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
+    
         
     public Boolean ValidateExitsEmail(String Email){
           try{

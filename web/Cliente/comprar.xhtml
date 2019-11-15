@@ -10,9 +10,28 @@
     
     <ui:define name="content">
         <!-- Inicio de Programacion toxica-->
+        <p class="alert alert-success mt-5 w-50 ml-auto mr-auto d-block">${entradaController.entrada.funcion.id}</p>
+
+        <div class="d-flex justify-content-center">
             
-        <p class="alert alert-success mt-5 w-50 ml-auto mr-auto d-block">${param.cod}</p>
-        
+            <br/>
+            <div class="shadow-none w-50 p-5 ">        
+                <h:form>
+                    <a href="cartelera.xhtml" class="btn btn-success">Volver</a>
+                    <h3 class="grey-text text-center">Agregar Directores</h3>
+                    <div class="md-form">
+
+                        <h:outputLabel for="cantidad" value="Cantidad de entradas:"/>
+                        <h:inputText class="form-control" value="#{entradaController.contarAsientosDisponibles(param.id)}" required="true" 
+                                     requiredMessage="Debe ingresar una cantidad de entradas">
+
+                        </h:inputText>
+                    </div>	
+                    <p:messages closable="true" />
+                    <h:commandButton value="Aceptar"  class="btn btn-success"  />
+                </h:form>
+            </div>
+        </div>
         <!-- Fin Programación toxica-->
     </ui:define>
 </ui:composition>
