@@ -48,9 +48,18 @@
                             <a class="nav-link" href="contactanos.xhtml">Contactanos</a>
                         </li>
                         <c:if test="${sessionScope.Session != null}">
-                             <li>
-                                <a class="nav-link" href="asdasd">Alejandro</a>
-                            </li>
+                            <div class="dropdown">
+                                <button style="color: #007ad9;" class="btn btn-transparent p-0  pt-1 shadow-none dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   ${sessionScope.Session.nombre}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Tarjeta</a>
+                                    <a class="dropdown-item" href="cambiar.xhtml">Cambiar Contraseña</a>
+                                    <h:form>
+                                        <h:commandButton class="dropdown-item" value="Cerrar Sesión" action="${sesion.cerrarSesion()}" />
+                                    </h:form>
+                                </div>
+                            </div>
                         </c:if>
                         <c:if test="${sessionScope.Session == null}">
                             <li class="nav-item">
@@ -67,6 +76,7 @@
                 </div>
             </div>
         </nav>
+        
         <!--Header-->
 
         <!-- Contenido-->
@@ -282,9 +292,7 @@
                             <div class="md-form mb-5">
                                 <i class="fas fa-user prefix grey-text"></i>
                                 <p:inputText class="form-control" value="#{sesion.usuario.direccion}" required="true" placeholder="Soyapango, San Salvador" 
-                                             requiredMessage="Debe ingresar una direccion"
-                                             validatorMessage="Direccion ingresada no valido">
-                                    <f:validateRegex pattern="^[A-Za-z]{5,}(((\,( )|\,){0,1}[A-Za-z]{2,}|( ){0,1}){1,}){0,}$"/>
+                                             requiredMessage="Debe ingresar una direccion">
                                 </p:inputText>
                             </div>
                             <div class="md-form mb-5">

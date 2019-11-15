@@ -112,6 +112,41 @@ public class Sesion implements Serializable{
         JSFUtil.addSucessMessage("Email Confirmado");
     }
     
+    public void cambiarContrasenia(){
+        if(!usuario.getPassword().equals(usuario.getRepeatPass())){
+            JSFUtil.addErrorMessage("¡Error Contraseñas no coinciden!");
+            return;
+        }
+        Usuario validate =  usuarioFacade.IniciarSesion(usuario.getCorreo(),usuario.getOldPass());
+      
+        if(validate == null){
+            JSFUtil.addErrorMessage("¡Error! No se pudo validar las contraseñas");
+            return;
+        }
+        if(validate.getId() == null ){
+          JSFUtil.addInfoMessage("Contraseña incorrecta");
+          return;
+        }    
+        usuarioFacade.ActualizarContraseña(usuario.getPassword(),usuario.getId());  
+        JSFUtil.addSucessMessage("Contraseña Actualizada");
+    }
+
+    public void validateSession(){
+        externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        session = (HttpSession) externalContext.getSession(false);
+        Usuario session = (Usuario) this.session.getAttribute("Session");
+        if(session == null){
+            try{
+                externalContext.redirect("/ProyectoDWF/Cliente/index.xhtml");
+                JSFUtil.addInfoMessage("¡Error! No ha iniciado sesion");
+                return;
+            }catch(Exception e){
+                JSFUtil.addInfoMessage("¡Error! No ha iniciado sesion");
+                return;
+            }
+        }
+    }
+    
     public void iniciarSesion() {
       
       this.usuario =  usuarioFacade.IniciarSesion(usuario.getCorreo(),usuario.getPassword());
@@ -155,7 +190,7 @@ public class Sesion implements Serializable{
         session = (HttpSession) externalContext.getSession(false);
         session.invalidate();
         try{
-            externalContext.redirect("index.xhtml");
+            externalContext.redirect("/ProyectoDWF/Cliente/index.xhtml");
         }catch(Exception e){
             JSFUtil.addInfoMessage("¡Error! No se pudo cerrar sesión");
         }

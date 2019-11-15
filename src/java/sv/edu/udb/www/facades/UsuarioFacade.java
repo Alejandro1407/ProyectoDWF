@@ -63,11 +63,25 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
              return null;
          }
     }
+    public List<Usuario> FindByTipo(int id){
+        try{
+            EntityManager em =  JPAUtil.getEntityManager();
+            Query query = em.createNamedQuery("Usuario.findByTipo").setParameter("tipo",id); 
+            try{
+                List<Usuario> usuarios =  query.getResultList();
+                return usuarios;
+            }catch(Exception e){
+                return null;
+            }
+         }catch(Exception e){
+             return null;
+         }
+    }
     
     public boolean ActualizarContraseña(String NewPass,int ID){
         try{
             EntityManager em =  JPAUtil.getEntityManager();
-            Query query = em.createNativeQuery("UPDATE usuario SET password = ? WHERE id = ?").setParameter(1,NewPass).
+            Query query = em.createNativeQuery("UPDATE usuario SET password = SHA2(?,256) WHERE id = ?").setParameter(1,NewPass).
                                                                                                setParameter(2,ID);
             query.executeUpdate();
             return true;

@@ -72,9 +72,7 @@
                                      <f:validateRegex pattern="^[2|9|6|7][0-9]{7}$"/>
                       </p:inputText>
                         <p:inputText class="form-control" value="#{usuariosController.usuario.direccion}" required="true" placeholder="Soyapango, San Salvador" 
-                                     requiredMessage="Debe ingresar una direccion"
-                                     validatorMessage="Direccion ingresada no valido">
-                                     <f:validateRegex pattern="^[ñA-Za-z]{5,}(((\,( )|\,){0,1}[ñA-Za-z]{2,}|( ){0,1}){1,}){0,}$"/>
+                                     requiredMessage="Debe ingresar una direccion">
                       </p:inputText>
                       <p:inputText  class="form-control" value="#{usuariosController.usuario.dui}" required="true" placeholder="XXXXXXXX-X" 
                                      requiredMessage="Debe ingresar un numero DUI"

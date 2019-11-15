@@ -1,0 +1,55 @@
+<ui:composition template="/WEB-INF/cliente_template.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <ui:define name="title">Multicinema-Index</ui:define>
+    
+    <ui:define name="content">
+        <!-- Inicio de Programacion toxica-->
+        ${sesion.validateSession()}
+        <div class="container mt-5">
+            <h:form>
+                <table border="0" cellspacing="2" cellpadding="5">
+                    <h2>Cambiar contraseña</h2>
+                        <h:outputLabel value="Antigua Contraseña:" for="OldPass"/>
+                        <h:inputSecret id="OldPass"  styleClass="form-control"
+                               required="true"
+                               value="#{sesion.usuario.oldPass}"
+                               requiredMessage="Debe ingresar una contraseña"
+                               validatorMessage="Longitud minima: 8 Caracteres">
+                               <f:validateRegex pattern="^[ñA-Za-z0-9]{8,}$"/>  
+                        </h:inputSecret>
+                    
+                        <h:outputLabel value="Nueva Contraseña:" for="NewPass1"/>
+                        <h:inputSecret id="NewPass1"  styleClass="form-control"
+                                  required="true"
+                                  value="#{sesion.usuario.password}"
+                                  requiredMessage="Debe ingresar una contraseña"
+                                  validatorMessage="Longitud minima: 8 Caracteres">
+                                  <f:validateRegex pattern="^[ñA-Za-z0-9]{8,}$"/>  
+                           </h:inputSecret>
+                        
+                        <h:outputLabel value="Repetir Contraseña:" for="NewPass2"/>
+                        <h:inputSecret id="NewPass2"  styleClass="form-control"
+                               required="true"
+                               value="#{sesion.usuario.repeatPass}"
+                               requiredMessage="Debe ingresar una contraseña"
+                               validatorMessage="Longitud minima: 8 Caracteres">
+                               <f:validateRegex pattern="^[ñA-Za-z0-9]{8,}$"/>  
+                        </h:inputSecret>
+                    <tr>
+                         <p:messages closable="true" />
+                         <td><h:commandButton class="btn btn-success" value="Cambiar" action="${sesion.cambiarContrasenia()}" /></td>
+                        <td><input type="reset" class="btn btn-warning" value="Limpiar"/></td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
+        <!-- Fin Programación toxica-->
+    </ui:define>
+</ui:composition>
+  

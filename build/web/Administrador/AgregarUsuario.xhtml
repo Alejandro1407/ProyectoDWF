@@ -75,9 +75,7 @@
                 <h:inputText id="direccion" styleClass="form-control"
                              value="#{usuariosController.usuario.direccion}"
                              required="true"
-                             requiredMessage="Debe ingresar una direccion"
-                             validatorMessage="Direccion ingresada no valido">
-                     <f:validateRegex pattern="^[ñA-Za-z]{5,}(((\,( )|\,){0,1}[ñA-Za-z]{2,}|( ){0,1}){1,}){0,}$"/>
+                             requiredMessage="Debe ingresar una direccion">
                 </h:inputText>
 
                 <h:outputLabel for="dui" value="Dui:"/>
@@ -104,7 +102,7 @@
                                value="#{usuariosController.usuario.password}"
                                requiredMessage="Debe ingresar una contraseña"
                                validatorMessage="Longitud minima: 8 Caracteres">
-                    <f:validateRegex pattern="^[ñA-Za-z0-9]{8}$"/>  
+                    <f:validateRegex pattern="^[ñA-Za-z0-9]{8,}$"/>  
                 </h:inputSecret>
                 <h:outputLabel for="tipo" value="Tipo:"/>
                 <h:selectOneMenu id="tipo" styleClass="form-control" value="#{usuariosController.tipo.id}">

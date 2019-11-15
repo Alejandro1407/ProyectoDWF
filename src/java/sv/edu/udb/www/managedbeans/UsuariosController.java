@@ -73,6 +73,16 @@ public class UsuariosController implements Serializable{
             return null;
         }
     }
+      
+    public List<Usuario> obtenerDependientes(){
+        try{
+            return usuarioFacade.FindByTipo(4);
+        }catch(Exception e){
+            return null;
+        }
+    }
+      
+      
     public String insertarUsuario(){
      try{
             Boolean ExitsDUI = usuarioFacade.ValidateExitsDUI(usuario.getDui());
@@ -99,6 +109,33 @@ public class UsuariosController implements Serializable{
             return "AgregarUsuario";
         }
     }
+        public String insertarDependiente(){
+     try{
+            Boolean ExitsDUI = usuarioFacade.ValidateExitsDUI(usuario.getDui());
+            Boolean ExitsEmail = usuarioFacade.ValidateExitsEmail(usuario.getCorreo());
+            if(ExitsDUI == null || ExitsEmail == null){
+                JSFUtil.addErrorMessage("!Error¡ Datos no pudieron ser validados");
+            }
+            if(ExitsDUI){
+                JSFUtil.addErrorMessage("¡Error! Numero DUI ya registrado");
+                return "AgregarUsuario";
+            }
+            if(ExitsEmail){
+                JSFUtil.addErrorMessage("¡Error! Correo electronico ya registrado");
+                return "AgregarUsuario";
+            }         
+            usuario.setEnabled(true);
+            usuario.setTipo(new Tipo(4, "Dependiente"));
+            usuario.setPassword(JSFUtil.HashPassword(usuario.getPassword()));
+            usuarioFacade.create(usuario);
+            JSFUtil.addSucessMessage("¡Exito! usuario Insertado correctamente");
+            return "dependientes";
+        }catch(Exception e){
+            JSFUtil.addErrorMessage("¡Error! No pudo ser insertado");
+            return "AgregarDependiente";
+        }
+    }
+    
     public void eliminarUsuario(){
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         int id = Integer.parseInt(request.getParameter("id"));

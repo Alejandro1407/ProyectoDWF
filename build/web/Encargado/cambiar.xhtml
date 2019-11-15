@@ -10,10 +10,10 @@
     <ui:define name="options">
         
         <div class="list-group list-group-flush" >
-            <a href="index.xhtml" class="list-group-item list-group-item-actio waves-effect">
+            <a href="index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-chart-pie mr-5">DashBoard</i>
             </a>
-            <a href="peliculas.xhtml" class="list-group-item list-group-item-action waves-effect">
+            <a href="Peliculas/index.xhtml" class="list-group-item list-group-item-action waves-effect">
                 <i class="fas fa-video mr-3">Peliculas</i>
             </a>
              <a href="funciones.xhtml" class="list-group-item list-group-item-action waves-effect">
@@ -25,8 +25,10 @@
             <a href="cambiar.xhtml" class="list-group-item active waves-effect">
                 <i class="fas fa-lock mr-3">Cambiar Contraseña</i>
             </a>
-             <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
-             </p:commandButton>
+            <h:form>
+                <p:commandButton value="Cerrar Sesión" icon="fas fa-sign-out-alt" class="btn btn-white border-0 pl-5 pr-2 shadow-none list-group-item red-text list-group-item-action waves-effect" action="${sesion.cerrarSesion}" >
+                </p:commandButton>
+             </h:form>
         </div>
         
     </ui:define>
@@ -36,7 +38,44 @@
     <ui:define name="content">
         <!-- Inicio de la Programación toxica-->
         
-        CRUD Usuarios
+         <div class="container mt-5">
+            <h:form>
+                <table border="0" cellspacing="2" cellpadding="5">
+                    <h2>Cambiar contraseña</h2>
+                    <h:outputLabel value="Antigua Contraseña:" for="OldPass"/>
+                    <h:inputSecret id="OldPass"  styleClass="form-control"
+                                   required="true"
+                                   value="#{sesion.usuario.oldPass}"
+                                   requiredMessage="Debe ingresar una contraseña"
+                                   validatorMessage="Longitud minima: 8 Caracteres">
+                        <f:validateRegex pattern="^[ñA-Za-z0-9]{8,}$"/>  
+                    </h:inputSecret>
+
+                    <h:outputLabel value="Nueva Contraseña:" for="NewPass1"/>
+                    <h:inputSecret id="NewPass1"  styleClass="form-control"
+                                   required="true"
+                                   value="#{sesion.usuario.password}"
+                                   requiredMessage="Debe ingresar una contraseña"
+                                   validatorMessage="Longitud minima: 8 Caracteres">
+                        <f:validateRegex pattern="^[ñA-Za-z0-9]{8,}$"/>  
+                    </h:inputSecret>
+
+                    <h:outputLabel value="Repetir Contraseña:" for="NewPass2"/>
+                    <h:inputSecret id="NewPass2"  styleClass="form-control"
+                                   required="true"
+                                   value="#{sesion.usuario.repeatPass}"
+                                   requiredMessage="Debe ingresar una contraseña"
+                                   validatorMessage="Longitud minima: 8 Caracteres">
+                        <f:validateRegex pattern="^[ñA-Za-z0-9]{8,}$"/>  
+                    </h:inputSecret>
+                    <tr>
+                        <p:messages closable="true" />
+                        <td><h:commandButton class="btn btn-success" value="Cambiar" action="${sesion.cambiarContrasenia()}" /></td>
+                        <td><input type="reset" class="btn btn-warning" value="Limpiar"/></td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
         
         <!-- Fin Programación toxica-->
     </ui:define>

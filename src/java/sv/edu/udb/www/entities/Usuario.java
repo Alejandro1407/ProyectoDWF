@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
     , @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono")
     , @NamedQuery(name = "Usuario.findByDireccion", query = "SELECT u FROM Usuario u WHERE u.direccion = :direccion")
+    , @NamedQuery(name = "Usuario.findByTipo", query = "SELECT u FROM Usuario u WHERE u.tipo.id = :tipo")
     , @NamedQuery(name = "Usuario.findByDui", query = "SELECT u FROM Usuario u WHERE u.dui = :dui")
     , @NamedQuery(name = "Usuario.findByTarjeta", query = "SELECT u FROM Usuario u WHERE u.tarjeta = :tarjeta")
     , @NamedQuery(name = "Usuario.iniciarSesion", query = "SELECT u FROM Usuario u WHERE u.correo = :correo AND u.password = :password")
@@ -80,6 +82,11 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @NotNull
     private boolean enabled;
+    @Transient
+    private String OldPass;
+    @Transient
+    private String RepeatPass;
+    
     public Usuario() {
     }
 
@@ -207,6 +214,34 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "sv.edu.udb.entities.Usuario[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the OldPass
+     */
+    public String getOldPass() {
+        return OldPass;
+    }
+
+    /**
+     * @param OldPass the OldPass to set
+     */
+    public void setOldPass(String OldPass) {
+        this.OldPass = OldPass;
+    }
+
+    /**
+     * @return the RepeatPass
+     */
+    public String getRepeatPass() {
+        return RepeatPass;
+    }
+
+    /**
+     * @param RepeatPass the RepeatPass to set
+     */
+    public void setRepeatPass(String RepeatPass) {
+        this.RepeatPass = RepeatPass;
     }
     
 }
