@@ -38,6 +38,7 @@ import sv.edu.udb.www.facades.ClasificacionFacade;
 import sv.edu.udb.www.facades.GeneroFacade;
 import sv.edu.udb.www.facades.IdiomaFacade;
 import sv.edu.udb.www.facades.ProduccionFacade;
+import sv.edu.udb.www.util.JSFUtil;
 
 
 @ManagedBean
@@ -98,12 +99,6 @@ public class PeliculasController implements Serializable {
         return sub;
     }
 
-    /**
-     * Método que permite insertar pelicula
-     *
-     * @return "index"
-     * @throws java.io.IOException
-     */
     public String insertarPelicula() throws IOException{
             byte[] bytes; 
         if(fileUpload != null){
@@ -138,19 +133,22 @@ public class PeliculasController implements Serializable {
         });
         pelicula.setActoresList(al);
         peliculaFacade.create(getPelicula());
+        JSFUtil.addSucessMessage("¡Exito Pelicula insertada!");
         return "index";
     }
 
     public void eliminarPelicula(int id){
-        
+        if(!peliculaFacade.validaFuncion(id)){
+            JSFUtil.addErrorMessage("¡Error! Elimine las funciones de esta pelicula");
+            return;
+        }
         peliculaFacade.remove(peliculaFacade.find(id));
-        
+        JSFUtil.addSucessMessage("¡Exito! Pelicula Eliminada");
+        return;
     }
-     /**
-     * Método que permite cargar la pelicula
-     *
-     * 
-     */
+    
+   
+
     public void loadPelicula(){
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         int id;

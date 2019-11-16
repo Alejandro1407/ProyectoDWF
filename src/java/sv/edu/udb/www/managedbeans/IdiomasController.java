@@ -72,7 +72,7 @@ public class IdiomasController implements Serializable{
         try{
             setIdioma(idiomaFacade.find(id));   
            if(!idioma.getFuncionList().isEmpty()){
-                JSFUtil.addErrorMessage("¡Error! Elimine todas las referencias a esta clasificación e intente de nuevo");
+                JSFUtil.addErrorMessage("¡Error! Elimine todas las referencias a este idioma");
                 return;
             }
            if(!idiomaFacade.ValidateIdioma(id)){

@@ -10,10 +10,6 @@
     
     <ui:define name="content">
         <!-- Inicio de Programacion toxica-->
-        ${entradaController.loadEntrada()}
-        <p class="alert alert-success mt-5 w-50 ml-auto mr-auto d-block">#{entradaController.entrada}</p>
-
-        
         <c:forEach items="#{entradaController.obtenerEntradas()}" var="entrada">
             #{entrada.id}
             #{entrada.codigo}
@@ -28,7 +24,7 @@
             <div class="shadow-none w-50 p-5 ">        
                 <h:form>
                     <a href="cartelera.xhtml" class="btn btn-success">Volver</a>
-                    <h3 class="grey-text text-center">Agregar Directores</h3>
+                    <h3 class="grey-text text-center">Comprar</h3>
                     <div class="md-form">
 
                         <h:outputLabel for="cantidad" value="Cantidad de entradas:"/>

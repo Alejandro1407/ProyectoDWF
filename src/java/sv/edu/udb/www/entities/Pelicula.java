@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pelicula.findByTitulo", query = "SELECT p FROM Pelicula p WHERE p.titulo = :titulo")
     , @NamedQuery(name = "Pelicula.findByDuracion", query = "SELECT p FROM Pelicula p WHERE p.duracion = :duracion")
     , @NamedQuery(name = "Pelicula.findBySubtitulada", query = "SELECT p FROM Pelicula p WHERE p.subtitulada = :subtitulada")
-    , @NamedQuery(name = "Pelicula.findByEstreno", query = "SELECT p FROM Pelicula p WHERE p.estreno = :estreno")})
+    , @NamedQuery(name = "Pelicula.findByEstreno", query = "SELECT p FROM Pelicula p WHERE p.estreno = :estreno")
+    , @NamedQuery(name = "Pelicula.findByFuncion", query = "SELECT f FROM Funcion f WHERE f.pelicula.id = :id ") })
 public class Pelicula implements Serializable {
 
     private static final long serialVersionUID = 1L;
